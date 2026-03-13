@@ -38,7 +38,7 @@ target: _blank
 
 ::card
 ---
-title: 簡単な自作テーマで作ったWordPressのブログ
+title: 簡単な自作テーマで作ったWordPressの技術ブログ
 icon: i-ic-baseline-wordpress
 to: https://www.pitahex.com
 target: _blank
@@ -67,10 +67,56 @@ target: _blank
 アプリ開発やプログラミングに限定せず、メンバーが「これ作ってみたいね」「面白そうだ！」と盛り上がったアイデアを、協力し合いながら形にしていくことを最も大切にしています。
 ::
 
+::card
+---
+title: MicroCMS（ヘッドレスCMS）を用いたブログのリポジトリ
+icon: i-lucide-github
+to: https://pitamai.com
+target: _blank
+---
+大昔に作ったので、あまり綺麗なコードではないですが、MicroCMSを用いたブログのリポジトリです。
+::
+
 ::
 :::
 
 :::TheSection
+## 私のデザイン
+
+どちらかというと、アニメのサイトのような派手なUIとかは作れないです。
+ですが、見やすいUIは昔から得意です。
+
+### 私が作った技術ブログのUI
+
+1からCSSを作って作成した技術ブログのUIです。
+
+![Image](/ui2.png)
+
+***
+
+### 認証認可サーバーのダッシュボードUI
+
+Nuxt UIを用いて作成しています。
+
+![Image](/dashboard-ui.png)
+
+***
+
+### MicroCMSを用いたブログのUI
+
+localhostなのでURLはないですが、UIのスクショだけ載せておきます。
+これも1からCSSを作っています
+
+![Image](/ui3.png)
+
+![Image](/ui4.png)
+
+:::
+
+***
+
+:::TheSection
+
 ## 連絡先
 - mail: eita{at}pitamai.com
 

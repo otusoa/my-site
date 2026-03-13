@@ -13,6 +13,10 @@ const items: NavigationMenuItem[] = [
   {
     label: 'Contact',
     to: '/#連絡先'
+  },
+  {
+    label: '私のデザイン',
+    to: '/#私のデザイン',
   }
 ]
 </script>
