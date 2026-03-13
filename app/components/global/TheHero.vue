@@ -3,10 +3,9 @@ const links = ref([
   {
     label: '詳しく見てみる',
     to: '#about-me',
-    color: 'neutral' as const,
     trailingIcon: 'i-lucide-arrow-right'
   }
-] as const)
+])
 </script>
 
 <template>
