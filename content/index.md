@@ -16,6 +16,8 @@ title: 小林栄太のリンク集
   - React(Next.js) 最近はじめた
 - HTML/CSS
 
+~~CSS極めてましたが、最近はTailwindCSSばっかり使ってます。~~
+
 ::
 ---
 :::TheSection
@@ -38,7 +40,7 @@ target: _blank
 ---
 title: 簡単な自作テーマで作ったWordPressのブログ
 icon: i-ic-baseline-wordpress
-to: https://css.pitahex.com
+to: https://www.pitahex.com
 target: _blank
 ---
 中学生のとき作りました。雑記の技術ブログです。
