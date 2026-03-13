@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const route = useRoute()
-
-const { data: page } = await useAsyncData('page-' + route.path, () => {
-  return queryCollection('content').path(route.path).first()
+const { data: page } = await useAsyncData('page-root', () => {
+  return queryCollection('content').path('/').first()
 })
 
 if (!page.value) {
