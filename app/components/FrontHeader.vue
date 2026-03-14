@@ -28,7 +28,7 @@ const items: NavigationMenuItem[] = [
     </template>
 
     <template #body>
-      <UNavigationMenu :items="items" variant="link" />
+      <UNavigationMenu :items="items" orientation="vertical" />
     </template>
 
     <UNavigationMenu :items="items" />
