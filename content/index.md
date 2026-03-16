@@ -71,7 +71,7 @@ target: _blank
 ---
 title: MicroCMS（ヘッドレスCMS）を用いたブログのリポジトリ
 icon: i-lucide-github
-to: https://pitamai.com
+to: https://github.com/PitaMai-Technology/blogs
 target: _blank
 ---
 大昔に作ったので、あまり綺麗なコードではないですが、MicroCMSを用いたブログのリポジトリです。
