@@ -43,7 +43,7 @@ icon: i-ic-baseline-wordpress
 to: https://www.pitahex.com
 target: _blank
 ---
-中学生のとき作りました。雑記の技術ブログです。
+中学生のとき作りました。雑記の技術ブログです。(アーカイブ済み)
 ::
 
 ::card
