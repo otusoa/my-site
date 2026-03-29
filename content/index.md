@@ -20,6 +20,31 @@ title: 小林栄太のリンク集
 
 ::
 ---
+::TheSection
+
+## 最近やってること
+
+Lism CSSというCSSフレームワークベースのVue.jsラッパーを作ってます。
+
+Nuxt用モジュールも作成しており、Nuxtプロジェクトでも簡単に導入できます。
+
+<https://lism-css.com/>
+
+###
+
+::card
+---
+title: Lism CSS Vue
+icon: i-tabler-file-type-css
+to: https://outline-wiki.pitamai.com/s/43ec0697-df61-406c-b38a-4fdd92a4108d
+target: _blank
+---
+Lism CSSベースのVue.jsラッパーです。
+::
+
+::
+---
+
 :::TheSection
 
 ## リンク集(Project)
@@ -99,6 +124,9 @@ target: _blank
 Nuxt UIを用いて作成しています。
 
 ![Image](/dashboard-ui.png)
+
+![Image](/ui5.png)
+
 
 ***
 
