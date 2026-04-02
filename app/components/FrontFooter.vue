@@ -3,7 +3,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 const links: NavigationMenuItem[] = [
   {
-    label: 'ピタマイ(私のチーム)',
+    label: 'ピタマイ(私のコミュニティ)',
     to: 'https://pitamai.com',
     target: '_blank'
   },
@@ -27,7 +27,8 @@ const links: NavigationMenuItem[] = [
     <UNavigationMenu :items="links" variant="link" />
 
     <template #right>
-      <UButton icon="i-skill-icons-github-dark" color="neutral" variant="ghost" to="https://github.com/otusoa"
+      <UButton
+icon="i-skill-icons-github-dark" color="neutral" variant="ghost" to="https://github.com/otusoa"
         target="_blank" aria-label="GitHub" />
     </template>
   </UFooter>

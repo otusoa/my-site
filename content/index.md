@@ -11,10 +11,14 @@ title: 小林栄太のリンク集
 なんかVue.jsとNuxtを触ってる人です。
 最近は認証認可サーバー作ってます。
 
+中学のとき、WordPressで簡単なテーマを自作しブログを運用したりしてたのが、プログラミングをやり始めたきっかけです。
+
 - TypeScript
   - Vue.js(Nuxt) ←メインはこっち
+    かれこれ1年ぐらいやってます。
   - React(Next.js) 最近はじめた
 - HTML/CSS
+- PHP 昔やってたので、構文はある程度わかります。
 
 ~~CSS極めてましたが、最近はTailwindCSSばっかり使ってます。~~
 
@@ -28,7 +32,9 @@ Lism CSSというCSSフレームワークベースのVue.jsラッパーを作っ
 
 Nuxt用モジュールも作成しており、Nuxtプロジェクトでも簡単に導入できます。
 
-<https://lism-css.com/>
+本家 <https://lism-css.com/>
+
+私が作ったラッパー https://github.com/otusoa/lism-ui-vue
 
 ###
 
@@ -53,12 +59,23 @@ Lism CSSベースのVue.jsラッパーです。
 
 ::card
 ---
+title: Lism CSS Vue
+icon: i-tabler-file-type-css
+to: https://outline-wiki.pitamai.com/s/43ec0697-df61-406c-b38a-4fdd92a4108d
+target: _blank
+---
+Lism CSSベースのVue.jsラッパーです。
+::
+
+::card
+---
 title: 自作クラスレスCSSフレームワーク
 icon: i-tabler-file-type-css
 to: https://css.pitahex.com
 target: _blank
 ---
 ドキュメント型サイトに最適化されたClassレスベースのCSSフレームワークです。
+(最近はあんまり動かしていないので、Lism CSSのVue版の方をよく触ってる)
 ::
 
 ::card
@@ -73,7 +90,7 @@ target: _blank
 
 ::card
 ---
-title: 自作のチーム内の認証, 認可サーバー
+title: 自作のコミュニティ内の認証, 認可サーバー
 icon: i-simple-icons-betterauth
 to: https://outline-wiki.pitamai.com/s/4965015d-d59e-4f45-9c9e-3b1992d945d8
 target: _blank
@@ -83,7 +100,7 @@ Better Authを基盤に作成されています。
 
 ::card
 ---
-title: 私のチーム
+title: 私のコミュニティ
 icon: i-lucide-users-round
 to: https://pitamai.com
 target: _blank
@@ -100,6 +117,16 @@ to: https://github.com/PitaMai-Technology/blogs
 target: _blank
 ---
 大昔に作ったので、あまり綺麗なコードではないですが、MicroCMSを用いたブログのリポジトリです。
+::
+
+::card
+---
+title: Qiita
+icon: i-simple-icons-qiita
+to: https://qiita.com/eita_kobayashi
+target: _blank
+---
+主にVue.jsやNuxtに関する技術情報を発信しています。
 ::
 
 ::
