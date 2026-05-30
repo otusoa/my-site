@@ -28,13 +28,13 @@ title: 小林栄太のリンク集
 
 ## 最近やってること
 
-Lism CSSというCSSフレームワークベースのVue.jsラッパーを作ってます。
+Lism CSSというCSSフレームワークベースのVue.js向けに改良したものを作ってます。
 
 Nuxt用モジュールも作成しており、Nuxtプロジェクトでも簡単に導入できます。
 
 本家 <https://lism-css.com/>
 
-私が作ったラッパー https://github.com/otusoa/lism-ui-vue
+私が作ったUIライブラリ https://github.com/otusoa/lism-ui-vue
 
 ###
 
@@ -42,10 +42,10 @@ Nuxt用モジュールも作成しており、Nuxtプロジェクトでも簡単
 ---
 title: Lism CSS Vue
 icon: i-tabler-file-type-css
-to: https://outline-wiki.pitamai.com/s/43ec0697-df61-406c-b38a-4fdd92a4108d
+to: https://github.com/otusoa/lism-ui-vue
 target: _blank
 ---
-Lism CSSベースのVue.jsラッパーです。
+Lism CSSをベースにしたVue.jsのUIライブラリです。
 ::
 
 ::
@@ -61,10 +61,10 @@ Lism CSSベースのVue.jsラッパーです。
 ---
 title: Lism CSS Vue
 icon: i-tabler-file-type-css
-to: https://outline-wiki.pitamai.com/s/43ec0697-df61-406c-b38a-4fdd92a4108d
+to: https://github.com/otusoa/lism-ui-vue
 target: _blank
 ---
-Lism CSSベースのVue.jsラッパーです。
+Lism CSSをベースにしたVue.jsのUIライブラリです。
 ::
 
 ::card
@@ -92,7 +92,7 @@ target: _blank
 ---
 title: 自作のコミュニティ内の認証, 認可サーバー
 icon: i-simple-icons-betterauth
-to: https://outline-wiki.pitamai.com/s/4965015d-d59e-4f45-9c9e-3b1992d945d8
+to: https://github.com/PitaMai-Technology/pitamai-account
 target: _blank
 ---
 Better Authを基盤に作成されています。
