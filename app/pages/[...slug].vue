@@ -27,7 +27,7 @@ useSeoMeta({
 
 <style lang="scss" scoped>
 .content-page {
-  @apply w-full;
+  @apply w-full pt-10;
 }
 
 .content-article {
@@ -71,7 +71,7 @@ useSeoMeta({
   }
 
   :deep(h1) {
-    @apply mt-0 mb-12;
+    @apply mt-6 mb-8;
 
     font-size: clamp(2rem, 5vw, 3rem);
   }

@@ -60,7 +60,7 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
     @apply text-white;
   }
 
-  &[data-align='left'] {
+  &[data-align='start'] {
     @apply me-auto;
   }
 
@@ -68,7 +68,7 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
     @apply mx-auto;
   }
 
-  &[data-align='right'] {
+  &[data-align='end'] {
     @apply ms-auto;
   }
 
