@@ -1,0 +1,6 @@
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+  pita-css: false
+  unrs-resolver: false
+  vue-demi: false
