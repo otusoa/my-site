@@ -1,16 +1,17 @@
-import { defineConfig, presetMini } from 'unocss'
+import { defineConfig, presetMini, transformerDirectives } from 'unocss'
 
 export default defineConfig({
   presets: [
     presetMini(),
   ],
 
+  transformers: [
+    transformerDirectives(),
+  ],
+
   theme: {
     colors: {
       primary: 'var(--color-primary)',
-      green: {
-        500: '#87cc5c',
-      }
     },
   },
 })

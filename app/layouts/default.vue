@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-green-100">
+  <div>
     <FrontHeader />
     <slot />
     <FrontFooter />

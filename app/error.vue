@@ -22,7 +22,7 @@ const props = defineProps({
         <p>理由:<br />
           {{ props.error.message }}</p>
         <!-- ボタン風 -->
-        <NuxtLink to="/" class="inline-block mt-4 px-2 py-1 bg-green-500 text-white rounded hover:bg-green-500/80">
+        <NuxtLink to="/" class="inline-block mt-4 px-2 py-1 bg-primary text-white rounded hover:bg-primary/80">
           ホームへ戻る
         </NuxtLink>
       </main>

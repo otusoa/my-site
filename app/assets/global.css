@@ -1,15 +1,92 @@
 :root {
+  /* Brand */
   --color-primary: #87cc5c;
+
+  /* Link */
+  --link-primary: #1570d4;
+  --link-active: #7d7d7d96;
+  --link-visited: #a15ccc;
+
+  /* Typography */
+  --font-serif:
+    'BIZ UDPMincho',
+    'Yu Mincho',
+    'YuMincho',
+    serif;
+
+  --font-sans:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  --font-mono:
+    ui-monospace,
+    'SFMono-Regular',
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+    /* テーブル */
+  --table-bg: transparent;
+  --table-heading-bg: rgb(0 0 0 / 0.04);
+  --table-row-alt: rgb(0 0 0 / 0.025);
+  --border-primary: rgb(0 0 0 / 0.15);
+  --text-muted: #737373;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-  font-family: 'BIZ UDPmincho', sans-serif;
-  /* 標準だとなぜか改行されないのでadd */
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.8;
+
   word-break: break-word;
-  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+/*
+ * リンクの色はContent側で適用する。
+ * Navigationなどまでvisited色にしない。
+ */
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }

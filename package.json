@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@unocss/nuxt": "^66.8.1",
+    "sass-embedded": "^1.103.1",
     "unocss": "^66.8.1"
   }
 }
