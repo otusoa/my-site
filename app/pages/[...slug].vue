@@ -45,12 +45,12 @@ useSeoMeta({
   :deep(h4),
   :deep(h5),
   :deep(h6) {
-    @apply font-bold leading-[1.4] tracking-[0.02em] position-relative;
+    @apply font-bold leading-[1.4] tracking-[0.02em];
 
     font-family: var(--font-serif);
 
     a {
-      @apply text-inherit no-underline;
+      @apply inline-flex items-center gap-2 text-inherit no-underline;
 
       &:visited {
         @apply text-inherit;
@@ -59,11 +59,7 @@ useSeoMeta({
   }
 
   :deep(:is(h1, h2, h3, h4, h5, h6) > a[href^='#']::before) {
-    @apply inline-block position-absolute text-size-base text-primary opacity-0 translate-x-[-0.25em] bg-neutral-300 rounded-[0.2em];
-
-    margin-inline-start: 0.4em;
-    top: 0.75em;
-    left: -1.5em;
+    @apply inline-block flex-none text-size-base leading-none text-primary p-1 opacity-0 translate-x-[-0.25em] bg-neutral-100 rounded-[0.2em];
 
     content: '#';
     transition:

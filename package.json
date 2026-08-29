@@ -12,6 +12,8 @@
     "@nuxt/content": "^3.16.0",
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/fonts": "^0.14.0",
+    "@nuxt/icon": "2.5.1",
+    "@nuxt/image": "2.1.0",
     "better-sqlite3": "^12.11.1",
     "nuxt": "^4.5.2",
     "reka-ui": "^2.10.4"
