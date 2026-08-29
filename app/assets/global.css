@@ -1,6 +1,7 @@
 :root {
   /* Brand */
   --color-primary: #87cc5c;
+  --color-secondary: #3f7621;
 
   /* Link */
   --link-primary: #1570d4;
@@ -82,9 +83,11 @@ svg {
   max-width: 100%;
 }
 
+/* 
+選択テキストの色
 ::selection {
   background: var(--color-primary);
-}
+} */
 
 :focus-visible {
   outline: 2px solid var(--color-primary);

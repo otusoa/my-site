@@ -52,7 +52,7 @@ watch(
   <header class="site-header">
     <div class="mx-auto flex py-4 max-w-6xl items-center justify-between px-6">
       <NuxtLink class="site-name" to="/">
-        <NuxtImg src="/logo.svg" alt="eita.vue" class="h-10 w-10" />
+        <NuxtImg src="/logo.svg" alt="eita.vue" class="h-16 w-16" />
         <span class="text-sm text-neutral-700">eita.vue</span>
       </NuxtLink>
 
@@ -127,7 +127,7 @@ watch(
 
 <style scoped lang="scss">
 .site-header {
-  @apply fixed inset-x-0 top-0 z-20 bg-neutral-100;
+  @apply inset-x-0 top-0 bg-neutral-100;
   border-block-end: 1px solid var(--border-primary);
 }
 
@@ -153,7 +153,7 @@ watch(
   color: inherit;
   cursor: pointer;
   background: transparent;
-  border: 1px solid var(--border-primary);
+  border: 2px solid var(--border-primary);
   @apply bg-green-100
 }
 
@@ -230,7 +230,7 @@ watch(
 
 .menu-link:hover,
 .menu-link[aria-current='page'] {
-  color: #3f7621;
+  @apply text-secondary;
 }
 
 .menu-link::after {
@@ -269,7 +269,7 @@ watch(
 }
 
 .submenu-trigger:hover {
-  color: #3f7621;
+  color: var(--color-secondary);
   background: rgb(135 204 92 / 0.12);
 }
 

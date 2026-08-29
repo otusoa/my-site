@@ -27,13 +27,11 @@ useSeoMeta({
 
 <style lang="scss" scoped>
 .content-page {
-  @apply w-full px-6 py-16;
+  @apply w-full;
 }
 
 .content-article {
   @apply mx-auto;
-
-  width: min(100%, 72ch);
 
   :deep(p) {
     @apply my-5 text-base leading-[1.9];
