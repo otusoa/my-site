@@ -10,7 +10,7 @@
       <h2>エンジニアリング・研究</h2>
       <ul class="text-xl">
         <li>Web開発 / UI設計</li>
-        <li>神道学(教派神道)</li>
+        <li>神道学(教派神道)・教義研究</li>
       </ul>
     </div>
   </section>
@@ -65,7 +65,7 @@
   paint-order: stroke;
 
   h1 {
-    @apply mb-4 text-7xl font-bold line-height-none;
+    @apply mb-4 text-5xl font-bold line-height-none;
   }
 
   h2 {

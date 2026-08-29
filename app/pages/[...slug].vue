@@ -31,10 +31,10 @@ useSeoMeta({
 }
 
 .content-article {
-  @apply mx-auto;
+  @apply mx-auto text-gray-800;
 
   :deep(p) {
-    @apply my-5 text-base leading-[1.9];
+    @apply my-2 text-base leading-[2];
   }
 
   :deep(h1),
@@ -77,40 +77,65 @@ useSeoMeta({
   }
 
   :deep(h2) {
-    @apply mt-16 mb-6 pb-2 border-b border-current;
+    position: relative;
+
+    @apply mt-10 mb-4 pb-2 border-b border-current;
 
     font-size: clamp(1.5rem, 3vw, 2rem);
+    border-block-end-color: var(--border-primary);
+  }
+
+  :deep(h2::after) {
+    position: absolute;
+    inset-block-end: -1px;
+    inset-inline-start: 0;
+
+    width: 3.5rem;
+    height: 3px;
+
+    content: '';
+    background: var(--color-primary);
   }
 
   :deep(h3) {
-    @apply mt-10 mb-4 text-[1.35rem];
+    position: relative;
+
+    @apply mt-10 mb-2 text-[1.35rem];
+
+    padding-inline-start: 1.1rem;
+  }
+
+  :deep(h3::before) {
+    position: absolute;
+    inset-block-start: 0.45em;
+    inset-inline-start: 0.1rem;
+
+    width: 0.9rem;
+    height: 0.9rem;
+
+    content: '';
+    background: var(--color-primary);
+    transform: rotate(45deg);
   }
 
   :deep(h4) {
     @apply mt-8 mb-3 text-[1.15rem];
   }
 
-  :deep(a) {
-    @apply underline decoration-[0.08em] underline-offset-[0.18em];
-
-    color: var(--link-primary);
-
-    &:visited {
-      color: var(--link-visited);
-    }
-
-    &:active {
-      color: var(--link-active);
-    }
-  }
-
+  /* すべてのリスト */
   :deep(ul),
   :deep(ol) {
     @apply my-6 ps-8;
   }
 
-  :deep(li) {
-    @apply my-[0.4rem];
+  /* li直下のネストされたリスト */
+  :deep(li > :is(ul, ol)) {
+    @apply my-2 ps-6;
+  }
+
+  /* ネストされたリスト内の項目 */
+  :deep(li > :is(ul, ol) > li) {
+    @apply my-1;
   }
 
   :deep(blockquote) {
@@ -136,7 +161,7 @@ useSeoMeta({
   }
 
   :deep(pre) {
-    @apply my-8 p-5 overflow-x-auto border border-black/10;
+    @apply my-8 p-5 bg-black overflow-x-auto;
 
     font-family: var(--font-mono);
   }

@@ -30,7 +30,7 @@
     Consolas,
     monospace;
 
-    /* テーブル */
+  /* テーブル */
   --table-bg: transparent;
   --table-heading-bg: rgb(0 0 0 / 0.04);
   --table-row-alt: rgb(0 0 0 / 0.025);
@@ -81,6 +81,20 @@ picture,
 svg {
   display: block;
   max-width: 100%;
+}
+
+:deep(a) {
+  @apply underline decoration-[0.08em] underline-offset-[0.18em];
+
+  color: var(--link-primary);
+
+  &:visited {
+    color: var(--link-visited);
+  }
+
+  &:active {
+    color: var(--link-active);
+  }
 }
 
 /* 
