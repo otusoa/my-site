@@ -1,12 +1,15 @@
-@import "tailwindcss";
-@import "@nuxt/ui";
-
-html {
-  font-family: 'BIZ UDPGothic', sans-serif;
-  /* 標準だとなぜか改行されないのでadd */
-  word-break: break-word;
+:root {
+  --color-primary: #87cc5c;
 }
 
-@theme static {
-  --color-green-500: #87cc5c;
+html {
+  font-family: 'BIZ UDPmincho', sans-serif;
+  /* 標準だとなぜか改行されないのでadd */
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }

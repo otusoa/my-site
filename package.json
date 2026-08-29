@@ -12,10 +12,12 @@
     "@nuxt/content": "^3.16.0",
     "@nuxt/eslint": "^1.15.2",
     "@nuxt/fonts": "^0.14.0",
-    "@nuxt/ui": "^4.11.0",
     "better-sqlite3": "^12.11.1",
     "nuxt": "^4.5.2",
-    "pita-css": "^0.6.4",
-    "tailwindcss": "^4.3.3"
+    "reka-ui": "^2.10.4"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^66.8.1",
+    "unocss": "^66.8.1"
   }
 }

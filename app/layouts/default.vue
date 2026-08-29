@@ -1,18 +1,7 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <UPage>
+  <div class="bg-green-100">
     <FrontHeader />
     <slot />
     <FrontFooter />
-  </UPage>
+  </div>
 </template>
-
-<style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-</style>
