@@ -8,9 +8,11 @@ title: 小林栄太(eita.vue)のポートフォリオ
 :::BaseContainer
 ## 私について
 
+:::ProfileCard{name="小林栄太" handle="S高 5期生 (高校2年生)" role="研究者 / Webエンジニア" image="/eita.svg"}
 エンジニアリングでは Vue.js / Nuxt を中心に、UI設計や認証・認可、UIライブラリ作りに関心があります。
 
 研究では、神理教を中心に、近代日本の宗教思想・教義について調べています。
+:::
 
 ::BaseButton{to="/about" arrow="right" text="eita.vueについて詳しく見てみる"}
 ::
@@ -43,17 +45,6 @@ Vue.js / Nuxtを中心にWeb開発をしています。
 また、CSSが昔から得意です。
 
 フロントエンドだけでなく、UI設計や認証・認可の仕組みにも関心があり、実際のWebサービスや基盤の開発を趣味で通して学んでいます。
-
-### 主に使う技術
-- Vue.js / Nuxt
-- CSS
-- TypeScript
-- React / Next.js (ホントニチョットデキルヨ) 
-- Better Auth (認証・認可フレームワーク)
-
-### 勉強中
-
-- Golang
 
 ### 主な制作
 - PitaMaiアカウント / 組織内の認証・認可基盤

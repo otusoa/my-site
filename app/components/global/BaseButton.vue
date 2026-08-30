@@ -49,7 +49,7 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
 
 <style lang="scss" scoped>
 .base-button {
-  @apply flex w-fit items-center px-4 py-2 my-5 justify-center gap-3 bg-secondary rounded-full leading-[1] no-underline text-white;
+  @apply flex w-fit items-center px-4 py-2 my-5 justify-center gap-3 bg-secondary rounded-full leading-[1] no-underline text-white shadow-main;
 
   transition:
     color 150ms ease,

@@ -18,7 +18,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="content-page">
+  <main class="content-page" :class="{ 'content-page--top': route.path === '/' }">
     <article class="content-article">
       <ContentRenderer v-if="page" :value="page" />
     </article>
@@ -28,21 +28,25 @@ useSeoMeta({
 <style lang="scss" scoped>
 .content-page {
   @apply w-full pt-10;
+
+  &--top {
+    @apply pt-0;
+  }
 }
 
 .content-article {
   @apply mx-auto text-gray-800;
 
-  :deep(p) {
+  :deep(.base-container p) {
     @apply my-2 text-base leading-[2];
   }
 
-  :deep(h1),
-  :deep(h2),
-  :deep(h3),
-  :deep(h4),
-  :deep(h5),
-  :deep(h6) {
+  :deep(.base-container h1),
+  :deep(.base-container h2),
+  :deep(.base-container h3),
+  :deep(.base-container h4),
+  :deep(.base-container h5),
+  :deep(.base-container h6) {
     @apply font-bold leading-[1.4] tracking-[0.02em];
 
     font-family: var(--font-serif);
@@ -56,7 +60,7 @@ useSeoMeta({
     }
   }
 
-  :deep(:is(h1, h2, h3, h4, h5, h6) > a[href^='#']::before) {
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']::before) {
     @apply inline-block flex-none text-size-base leading-none text-primary p-1 opacity-0 translate-x-[-0.25em] bg-neutral-100 rounded-[0.2em];
 
     content: '#';
@@ -65,18 +69,18 @@ useSeoMeta({
       transform 150ms ease;
   }
 
-  :deep(:is(h1, h2, h3, h4, h5, h6) > a[href^='#']:is(:hover, :focus-visible, :active)::before),
-  :deep(:is(h1, h2, h3, h4, h5, h6):target > a[href^='#']::before) {
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']:is(:hover, :focus-visible, :active)::before),
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6):target > a[href^='#']::before) {
     @apply opacity-100 translate-x-0;
   }
 
-  :deep(h1) {
+  :deep(.base-container h1) {
     @apply mt-6 mb-8;
 
     font-size: clamp(2rem, 5vw, 3rem);
   }
 
-  :deep(h2) {
+  :deep(.base-container h2) {
     position: relative;
 
     @apply mt-10 mb-4 pb-2 border-b border-current;
@@ -85,7 +89,7 @@ useSeoMeta({
     border-block-end-color: var(--border-primary);
   }
 
-  :deep(h2::after) {
+  :deep(.base-container h2::after) {
     position: absolute;
     inset-block-end: -1px;
     inset-inline-start: 0;
@@ -97,7 +101,7 @@ useSeoMeta({
     background: var(--color-primary);
   }
 
-  :deep(h3) {
+  :deep(.base-container h3) {
     position: relative;
 
     @apply mt-10 mb-2 text-[1.35rem];
@@ -105,7 +109,7 @@ useSeoMeta({
     padding-inline-start: 1.1rem;
   }
 
-  :deep(h3::before) {
+  :deep(.base-container h3::before) {
     position: absolute;
     inset-block-start: 0.45em;
     inset-inline-start: 0.1rem;
@@ -118,27 +122,27 @@ useSeoMeta({
     transform: rotate(45deg);
   }
 
-  :deep(h4) {
+  :deep(.base-container h4) {
     @apply mt-8 mb-3 text-[1.15rem];
   }
 
   /* すべてのリスト */
-  :deep(ul),
-  :deep(ol) {
+  :deep(.base-container ul),
+  :deep(.base-container ol) {
     @apply my-6 ps-8;
   }
 
   /* li直下のネストされたリスト */
-  :deep(li > :is(ul, ol)) {
+  :deep(.base-container li > :is(ul, ol)) {
     @apply my-2 ps-6;
   }
 
   /* ネストされたリスト内の項目 */
-  :deep(li > :is(ul, ol) > li) {
+  :deep(.base-container li > :is(ul, ol) > li) {
     @apply my-1;
   }
 
-  :deep(blockquote) {
+  :deep(.base-container blockquote) {
     @apply my-8 mx-0 py-2 ps-5;
 
     border-inline-start: 3px solid var(--color-primary);
@@ -148,29 +152,29 @@ useSeoMeta({
     }
   }
 
-  :deep(hr) {
+  :deep(.base-container hr) {
     @apply my-16 border-0 opacity-20;
 
     border-block-start: 1px solid currentColor;
   }
 
-  :deep(:not(pre) > code) {
+  :deep(.base-container :not(pre) > code) {
     @apply px-[0.35em] py-[0.15em] text-[0.9em] bg-black/5 rounded-[0.2rem];
 
     font-family: var(--font-mono);
   }
 
-  :deep(pre) {
+  :deep(.base-container pre) {
     @apply my-8 p-5 bg-black overflow-x-auto;
 
     font-family: var(--font-mono);
   }
 
-  :deep(img) {
+  :deep(.base-container img) {
     @apply max-w-full h-auto my-10;
   }
 
-  :deep(table) {
+  :deep(.base-container table) {
     @apply w-full max-w-full mb-5 text-base;
 
     background: var(--table-bg, transparent);

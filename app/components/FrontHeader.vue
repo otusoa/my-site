@@ -153,8 +153,8 @@ watch(
   color: inherit;
   cursor: pointer;
   background: transparent;
-  border: 2px solid var(--border-primary);
-  @apply bg-green-100
+  border: 1px solid var(--border-primary);
+  @apply bg-green-100 shadow-main
 }
 
 .menu-trigger:hover {

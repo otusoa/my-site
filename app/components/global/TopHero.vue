@@ -1,7 +1,7 @@
 <template>
   <section class="top-hero">
     <div class="hero-background" aria-hidden="true">
-      <div class="slant-shape" />
+      <NuxtImg class="hero-image" src="/IMG_3416.JPG" alt="" format="webp" quality="82" />
     </div>
 
     <div class="hero-content">
@@ -16,7 +16,7 @@
   </section>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .top-hero {
   position: relative;
 
@@ -37,28 +37,30 @@
 .hero-background {
   position: absolute;
   z-index: -1;
-  inset: -8px;
+  inset: 0;
+  filter: blur(5px);
 
   overflow: hidden;
-  filter: saturate(0.4);
-  @apply bg-secondary;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+
+    content: '';
+  }
 }
 
-.slant-shape {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 50%;
-
-  width: 80vw;
+.hero-image {
+  width: 100%;
   height: 100%;
-
-  background: var(--color-primary);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  transform: translateX(-50%);
+  @apply my-0 mx-0;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.01);
 }
 
 .hero-content {
-  @apply m-auto text-white text-align-start p-8 bg-neutral-900/30 rounded-lg;
+  @apply m-auto text-white text-align-start py-8 px-12 shadow-main bg-neutral-900/30 rounded-lg;
   line-height: 1.35;
   text-wrap: balance;
   position: relative;

@@ -14,5 +14,8 @@ export default defineConfig({
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
     },
+    boxShadow: {
+      main: 'var(--box-shadow-primary)',
+    },
   },
 })
