@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@vueuse/nuxt',
+    'nuxt-studio'
   ],
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',

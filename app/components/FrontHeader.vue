@@ -40,6 +40,8 @@ const navigationItems: NavigationItem[] = [
   { label: '問い合わせ', to: '/contact' },
 ]
 
+const formatNavigationIndex = (index: number) => String(index + 1).padStart(2, '0')
+
 watch(
   () => route.fullPath,
   () => {
@@ -86,7 +88,7 @@ watch(
                       <NuxtLink class="menu-link" :to="item.to"
                         :aria-current="route.path === item.to ? 'page' : undefined" @click="isOpen = false">
                         <span class="font-sans text-sm text-neutral-500" aria-hidden="true">
-                          {{ String(index + 1).padStart(2, '0') }}
+                          {{ formatNavigationIndex(index) }}
                         </span>
                         <span>{{ item.label }}</span>
                       </NuxtLink>
@@ -111,7 +113,7 @@ watch(
                   <NuxtLink v-else class="menu-link" :to="item.to"
                     :aria-current="route.path === item.to ? 'page' : undefined" @click="isOpen = false">
                     <span class="font-sans text-sm text-neutral-500" aria-hidden="true">
-                      {{ String(index + 1).padStart(2, '0') }}
+                      {{ formatNavigationIndex(index) }}
                     </span>
                     <span>{{ item.label }}</span>
                   </NuxtLink>

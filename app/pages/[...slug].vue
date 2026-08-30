@@ -38,7 +38,7 @@ useSeoMeta({
   @apply mx-auto text-gray-800;
 
   :deep(.base-container p) {
-    @apply my-2 text-base leading-[2];
+    @apply mt-2 mb-4 text-base leading-[2];
   }
 
   :deep(.base-container h1),
@@ -60,7 +60,7 @@ useSeoMeta({
     }
   }
 
-  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']::before) {
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']::after) {
     @apply inline-block flex-none text-size-base leading-none text-primary p-1 opacity-0 translate-x-[-0.25em] bg-neutral-100 rounded-[0.2em];
 
     content: '#';
@@ -69,8 +69,8 @@ useSeoMeta({
       transform 150ms ease;
   }
 
-  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']:is(:hover, :focus-visible, :active)::before),
-  :deep(.base-container :is(h1, h2, h3, h4, h5, h6):target > a[href^='#']::before) {
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6) > a[href^='#']:is(:hover, :focus-visible, :active)::after),
+  :deep(.base-container :is(h1, h2, h3, h4, h5, h6):target > a[href^='#']::after) {
     @apply opacity-100 translate-x-0;
   }
 
@@ -111,8 +111,8 @@ useSeoMeta({
 
   :deep(.base-container h3::before) {
     position: absolute;
-    inset-block-start: 0.45em;
-    inset-inline-start: 0.1rem;
+    inset-block-start: 0.3em;
+    inset-inline-start: -0.50rem;
 
     width: 0.9rem;
     height: 0.9rem;
