@@ -50,6 +50,7 @@ useSeoMeta({
     @apply font-bold leading-[1.4] tracking-[0.02em];
 
     font-family: var(--font-serif);
+    scroll-margin-block-start: 6rem;
 
     a {
       @apply inline-flex items-center gap-2 text-inherit no-underline;

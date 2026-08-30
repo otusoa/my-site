@@ -8,11 +8,16 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@vueuse/nuxt',
-    'nuxt-studio'
+    'nuxt-studio',
   ],
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
   css: ['~/assets/global.scss'],
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
+    },
+  },
   content: {
     build: {
       markdown: {

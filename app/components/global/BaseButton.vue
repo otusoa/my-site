@@ -17,38 +17,38 @@ const props = withDefaults(defineProps<{
   target: '_self',
 })
 
-const arrowSymbols: Record<ArrowDirection, string> = {
-  right: '→',
-  left: '←',
-  up: '↑',
-  down: '↓',
-  external: '↗',
-  none: '',
+const arrowSymbols: Record<ArrowDirection, string | undefined> = {
+  right: 'i-lucide-arrow-right',
+  left: 'i-lucide-arrow-left',
+  up: 'i-lucide-arrow-up',
+  down: 'i-lucide-arrow-down',
+  external: 'i-lucide-external-link',
+  none: undefined,
 }
 
-const arrowSymbol = computed(() => arrowSymbols[props.arrow])
+const arrowIcon = computed(() => arrowSymbols[props.arrow])
 const isLeadingArrow = computed(() => props.arrow === 'left')
 const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : undefined)
 </script>
 
 <template>
   <NuxtLink class="base-button" :to="to" :target="target" :rel="rel" :data-arrow="arrow" :data-align="align">
-    <span v-if="arrowSymbol && isLeadingArrow" class="base-button__arrow" aria-hidden="true">
-      {{ arrowSymbol }}
+    <span v-if="arrowIcon && isLeadingArrow" aria-hidden="true">
+      <Icon :name="arrowIcon" class="base-button__arrow" />
     </span>
 
     <span class="base-button__label">
       <slot>{{ text || label }}</slot>
     </span>
 
-    <span v-if="arrowSymbol && !isLeadingArrow" class="base-button__arrow" aria-hidden="true">
-      {{ arrowSymbol }}
+    <span v-if="arrowIcon && !isLeadingArrow" aria-hidden="true">
+      <Icon :name="arrowIcon" class="base-button__arrow" />
     </span>
   </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
-.base-button {
+:where(.base-button) {
   @apply flex w-fit items-center px-4 py-2 my-5 justify-center gap-3 bg-secondary rounded-full leading-[1] no-underline text-white shadow-main;
 
   transition:
@@ -56,50 +56,53 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
     background-color 150ms ease,
     border-color 150ms ease;
 
-  &:visited {
-    @apply text-white;
-  }
-
-  &[data-align='start'] {
-    @apply me-auto;
-  }
-
-  &[data-align='center'] {
-    @apply mx-auto;
-  }
-
-  &[data-align='end'] {
-    @apply ms-auto;
-  }
-
-  &__arrow {
-    @apply inline-block text-[1.2em] text-white font-normal leading-none;
-
-    transition: transform 150ms ease;
-  }
-
-  &:is([data-arrow='right'], [data-arrow='external']):hover &__arrow {
-    transform: translateX(0.4rem);
-  }
-
-  &[data-arrow='left']:hover &__arrow {
-    transform: translateX(-0.4rem);
-  }
-
-  &[data-arrow='up']:hover &__arrow {
-    transform: translateY(-0.15rem);
-  }
-
-  &[data-arrow='down']:hover &__arrow {
-    transform: translateY(0.15rem);
-  }
-
   @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
 
-    &,
-    &__arrow {
-      transition: none;
-    }
+:where(.base-button:visited) {
+  @apply text-white;
+}
+
+:where(.base-button[data-align='start']) {
+  @apply me-auto;
+}
+
+:where(.base-button[data-align='center']) {
+  @apply mx-auto;
+}
+
+:where(.base-button[data-align='end']) {
+  @apply ms-auto;
+}
+
+:where(.base-button__arrow) {
+  @apply inline-block text-[1.2em] font-normal leading-none;
+
+  color: currentColor;
+  transition: transform 150ms ease;
+}
+
+:where(.base-button):is([data-arrow='right'], [data-arrow='external']):hover :where(.base-button__arrow) {
+  transform: translateX(0.4rem);
+}
+
+:where(.base-button[data-arrow='left']):hover :where(.base-button__arrow) {
+  transform: translateX(-0.4rem);
+}
+
+:where(.base-button[data-arrow='up']):hover :where(.base-button__arrow) {
+  transform: translateY(-0.15rem);
+}
+
+:where(.base-button[data-arrow='down']):hover :where(.base-button__arrow) {
+  transform: translateY(0.15rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.base-button__arrow) {
+    transition: none;
   }
 }
 </style>
