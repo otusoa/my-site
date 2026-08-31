@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxt/icon',
     '@nuxt/image',
+    '@nuxthub/core',
     '@vueuse/nuxt',
     'nuxt-studio',
   ],
@@ -18,6 +19,23 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'otusoa',
+      repo: 'my-site',
+      branch: 'refactor/v2',
+    },
+    media: {
+      external: true,
+      prefix: 'content',
+      publicUrl: process.env.NUXT_PUBLIC_STUDIO_MEDIA_PUBLIC_URL ?? 'https://r2.eita.ptmi.jp',
+      maxFileSize: 10 * 1024 * 1024,
+    },
+  },
+  hub: {
+    blob: true,
+  },
   content: {
     build: {
       markdown: {
@@ -28,10 +46,10 @@ export default defineNuxtConfig({
             // Theme used if `html.dark`
             dark: 'github-dark',
             // Theme used if `html.sepia`
-            sepia: 'monokai'
-          }
-        }
-      }
-    }
-  }
+            sepia: 'monokai',
+          },
+        },
+      },
+    },
+  },
 })

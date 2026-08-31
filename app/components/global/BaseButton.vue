@@ -17,13 +17,13 @@ const props = withDefaults(defineProps<{
   target: '_self',
 })
 
-const arrowSymbols: Record<ArrowDirection, string | undefined> = {
+const arrowSymbols: Record<ArrowDirection, string> = {
   right: 'i-lucide-arrow-right',
   left: 'i-lucide-arrow-left',
   up: 'i-lucide-arrow-up',
   down: 'i-lucide-arrow-down',
   external: 'i-lucide-external-link',
-  none: undefined,
+  none: '',
 }
 
 const arrowIcon = computed(() => arrowSymbols[props.arrow])

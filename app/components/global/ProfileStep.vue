@@ -22,10 +22,10 @@ import {
 const props = defineProps<{
   step?: string
   year: string
-  title: string
+  title: string | number
 }>()
 
-const resolvedStep = computed(() => Number(props.step))
+const resolvedStep = computed(() => props.step)
 </script>
 
 <template>
