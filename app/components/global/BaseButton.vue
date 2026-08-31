@@ -32,7 +32,8 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
 </script>
 
 <template>
-  <NuxtLink class="base-button" :to="to" :target="target" :rel="rel" :data-arrow="arrow" :data-align="align">
+  <NuxtLink class="base-button no-underline text-white" :to="to" :target="target" :rel="rel" :data-arrow="arrow"
+    :data-align="align">
     <span v-if="arrowIcon && isLeadingArrow" aria-hidden="true">
       <Icon :name="arrowIcon" class="base-button__arrow" />
     </span>
@@ -48,8 +49,8 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
 </template>
 
 <style lang="scss" scoped>
-:where(.base-button) {
-  @apply flex w-fit items-center px-4 py-2 my-5 justify-center gap-3 bg-secondary rounded-full leading-[1] no-underline text-white shadow-main;
+.base-button {
+  @apply flex w-fit items-center px-4 py-2 my-5 justify-center gap-3 bg-secondary rounded-full leading-[1] text-white shadow-main;
 
   transition:
     color 150ms ease,
@@ -61,47 +62,47 @@ const rel = computed(() => props.target === '_blank' ? 'noopener noreferrer' : u
   }
 }
 
-:where(.base-button:visited) {
+.base-button:visited {
   @apply text-white;
 }
 
-:where(.base-button[data-align='start']) {
+.base-button[data-align='start'] {
   @apply me-auto;
 }
 
-:where(.base-button[data-align='center']) {
+.base-button[data-align='center'] {
   @apply mx-auto;
 }
 
-:where(.base-button[data-align='end']) {
+.base-button[data-align='end'] {
   @apply ms-auto;
 }
 
-:where(.base-button__arrow) {
+.base-button__arrow {
   @apply inline-block text-[1.2em] font-normal leading-none;
 
   color: currentColor;
   transition: transform 150ms ease;
 }
 
-:where(.base-button):is([data-arrow='right'], [data-arrow='external']):hover :where(.base-button__arrow) {
+.base-button:is([data-arrow='right'], [data-arrow='external']):hover .base-button__arrow {
   transform: translateX(0.4rem);
 }
 
-:where(.base-button[data-arrow='left']):hover :where(.base-button__arrow) {
+.base-button[data-arrow='left']:hover .base-button__arrow {
   transform: translateX(-0.4rem);
 }
 
-:where(.base-button[data-arrow='up']):hover :where(.base-button__arrow) {
+.base-button[data-arrow='up']:hover .base-button__arrow {
   transform: translateY(-0.15rem);
 }
 
-:where(.base-button[data-arrow='down']):hover :where(.base-button__arrow) {
+.base-button[data-arrow='down']:hover .base-button__arrow {
   transform: translateY(0.15rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :where(.base-button__arrow) {
+  .base-button__arrow {
     transition: none;
   }
 }

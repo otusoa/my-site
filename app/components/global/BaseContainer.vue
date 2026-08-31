@@ -4,7 +4,7 @@
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .base-container~.base-container {
   border-block-start-width: 2px;
   border-block-start-style: solid;

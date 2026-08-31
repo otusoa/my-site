@@ -60,7 +60,7 @@
 }
 
 .hero-content {
-  @apply m-auto text-white text-align-start py-8 px-12 shadow-main bg-neutral-900/30 rounded-lg;
+  @apply m-auto text-white text-align-start py-8 px-12 max-md:px-6 shadow-main bg-neutral-900/30 rounded-lg;
   line-height: 1.35;
   text-wrap: balance;
   position: relative;

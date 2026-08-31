@@ -52,6 +52,7 @@ html {
   font-size: 16px;
   line-height: 1.8;
 
+  line-break: strict;
   word-break: break-word;
 }
 
@@ -84,20 +85,6 @@ picture,
 svg {
   display: block;
   max-width: 100%;
-}
-
-:deep(a) {
-  @apply underline decoration-[0.08em] underline-offset-[0.18em];
-
-  color: var(--link-primary);
-
-  &:visited {
-    color: var(--link-visited);
-  }
-
-  &:active {
-    color: var(--link-active);
-  }
 }
 
 /* 

@@ -43,27 +43,24 @@ Web開発と研究の両方に取り組んでいます。
 エンジニアリングでは、UI設計やフロントエンド開発、認証・認可などに関心があり、複数のプロジェクトをしています。
 
 研究では、教派神道を中心に、近代日本の宗教思想や教義について調べて、研究ノートや研究論文にしています。
+
+https\://pitahex.com
 ::
 
 ::base-container
 ## これまでの歩み
 
   :::profile-stepper
-  ---
-  defaultValue: 0
-  items:
-    - year: 2009年11月11日
-      title: 誕生
-    - year: 2025年3月
-      title: 公立中学校を卒業
-    - year: 2025年4月
-      title: S高等学校に入学
-    - year: 2025年12月
-      title: 2025年第一回ネットコースLT大会 登壇（学内）
-    - year: 2026年3月
-      title: 2025年第二回ネットコースLT大会 登壇（学内）
-    - year: 2026年8月
-      title: 学内での合同LT大会 登壇（学内）
-  ---
+  :profile-step{step="0" title="誕生" year="2009年11月11日"}
+
+  :profile-step{step="15" title="公立中学校を卒業" year="2025年3月"}
+
+  :profile-step{step="15" title="S高等学校に入学" year="2025年4月"}
+
+  :profile-step{step="16" title="2025年第一回ネットコースLT大会 登壇（学内）" year="2025年12月"}
+
+  :profile-step{step="16" title="2025年第二回ネットコースLT大会 登壇（学内）" year="2026年3月"}
+
+  :profile-step{step="16" title="学内での合同LT大会 登壇（学内）" year="2026年8月"}
   :::
 ::

@@ -153,6 +153,20 @@ useSeoMeta({
     }
   }
 
+  :deep(a:not(.base-button)) {
+    color: var(--link-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+
+    &:visited {
+      color: var(--link-visited);
+    }
+
+    &:active {
+      color: var(--link-active);
+    }
+  }
+
   :deep(.base-container hr) {
     @apply my-16 border-0 opacity-20;
 

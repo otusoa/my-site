@@ -13,6 +13,9 @@ export default defineConfig({
     colors: {
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
+      linkPrimary: 'var(--link-primary)',
+      linkActive: 'var(--link-active)',
+      linkVisited: 'var(--link-visited)',
     },
     boxShadow: {
       main: 'var(--box-shadow-primary)',
