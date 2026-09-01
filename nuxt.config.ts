@@ -30,7 +30,12 @@ export default defineNuxtConfig({
       external: true,
       prefix: 'content',
       publicUrl: process.env.NUXT_PUBLIC_STUDIO_MEDIA_PUBLIC_URL ?? 'https://r2.eita.ptmi.jp',
-      maxFileSize: 10 * 1024 * 1024,
+      allowedTypes: [
+        'image/*',
+        'video/*',
+        'audio/*',
+        'application/pdf',
+      ],
     },
   },
   hub: {

@@ -67,7 +67,7 @@ Vue.js / Nuxtを中心にWeb開発をしています。
   align: start
   arrow: right
   text: 制作物を見る
-  to: /engineering
+  to: /engineering#%E5%88%B6%E4%BD%9C%E7%89%A9project
   ---
   :::
 
@@ -76,7 +76,9 @@ Vue.js / Nuxtを中心にWeb開発をしています。
 
   研究やWeb開発についてのご連絡は、コンタクトページ、または以下のメールアドレスからお願いします
 
-  `eita[at]ptmi.jp` (`[at]`を@に置き換え、問い合わせください。)
+  `eita[at]ptmi.jp`
+
+  (`[at]`を@に置き換え、問い合わせください。)
 
     ::::base-button
     ---

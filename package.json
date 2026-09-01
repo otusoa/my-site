@@ -22,7 +22,8 @@
     "nuxt": "^4.5.2",
     "nuxt-studio": "1.7.0",
     "reka-ui": "^2.10.4",
-    "vue": "^3.5.42"
+    "vue": "^3.5.42",
+    "vue-pdf-embed": "2.1.6"
   },
   "devDependencies": {
     "@unocss/nuxt": "^66.8.1",

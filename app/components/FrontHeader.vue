@@ -30,13 +30,13 @@ const navigationItems: NavigationItem[] = [
   {
     label: '研究',
     to: '/research',
+  },
+  {
+    label: 'エンジニア', to: '/engineering',
     children: [
-      { label: '現在の研究テーマ', to: '/research/current' },
-      { label: '論文', to: '/research/publications' },
-      { label: '研究ノート', to: '/research/notes' },
+      { label: 'スライド', to: '/engineering/slides' },
     ],
   },
-  { label: 'エンジニア', to: '/engineering' },
   { label: '問い合わせ', to: '/contact' },
 ]
 
