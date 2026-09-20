@@ -33,9 +33,6 @@ export default defineNuxtConfig({
     url: 'https://eita.ptmi.jp',
     name: '小林栄太のポートフォリオサイト',
   },
-  sitemap: {
-    strictNuxtContentPaths: true,
-  },
   studio: {
     repository: {
       provider: 'github',
