@@ -67,17 +67,28 @@ const { width: viewportWidth, height: viewportHeight } = useElementSize(viewport
 const id = useId()
 const titleId = `pdf-slides-title-${id}`
 const statusId = `pdf-slides-status-${id}`
+const helpId = `pdf-slides-help-${id}`
 // PDFの表示状態。loadingは文書取得、renderingは各ページのCanvas描画を表す。
 const page = ref(normalizePage(props.startPage))
 const pageCount = ref(0)
 const zoom = ref(100)
 const loading = ref(true)
 const rendering = ref(false)
+const showRenderingStatus = ref(false)
 const progress = ref<number | null>(null)
 const errorMessage = ref('')
 const isFullscreen = ref(false)
 const isClient = ref(false)
 const pageAspectRatio = ref<number | null>(null)
+const renderingStatusDelay = 2000
+let renderingStatusTimer: ReturnType<typeof setTimeout> | undefined
+
+// ジェスチャー中の移動・長押しを記録し、選択やスクロールをタップと誤認しない。
+let gesture: { id: number, x: number, y: number, started: number, moved: boolean } | null = null
+let wheelTotal = 0
+let wheelLastAt = 0
+const canGestureNavigate = computed(() => zoom.value <= 100 && pageCount.value > 0
+  && !loading.value && !rendering.value && !errorMessage.value)
 
 // PDF.jsへ渡す前に、公開HTTPS URLであることを確認する。
 const isValidSource = computed(() => {
@@ -157,6 +168,20 @@ watch([page, renderedWidth], ([newPage, newWidth], [oldPage, oldWidth]) => {
     rendering.value = true
 })
 
+// ページ描画が2秒を超えた場合だけローディング表示を出す。
+// 2秒以内に描画が終わった場合はタイマーだけを破棄し、画面には何も表示しない。
+watch(rendering, (isRendering) => {
+  clearRenderingStatusTimer()
+  showRenderingStatus.value = false
+
+  if (isRendering) {
+    renderingStatusTimer = setTimeout(() => {
+      if (rendering.value)
+        showRenderingStatus.value = true
+    }, renderingStatusDelay)
+  }
+})
+
 // ブラウザでのみFullscreen APIの状態監視を開始する。
 onMounted(() => {
   isClient.value = true
@@ -165,6 +190,7 @@ onMounted(() => {
 
 // コンポーネント破棄時にグローバルイベントだけを解除する。
 onBeforeUnmount(() => {
+  clearRenderingStatusTimer()
   document.removeEventListener('fullscreenchange', updateFullscreenState)
 })
 
@@ -180,6 +206,14 @@ function clampPage(value: number): number {
     return Math.max(1, value)
 
   return Math.min(Math.max(1, value), pageCount.value)
+}
+
+// 保留中のローディング表示タイマーを安全に解除する。
+function clearRenderingStatusTimer() {
+  if (renderingStatusTimer !== undefined) {
+    clearTimeout(renderingStatusTimer)
+    renderingStatusTimer = undefined
+  }
 }
 
 // PDF URL変更時と初期化時に、文書単位の読み込み状態をリセットする。
@@ -299,10 +333,93 @@ function onKeydown(event: KeyboardEvent) {
   }
 }
 
-// ビューアーへフォーカスを戻し、ローカルなキーボード操作を有効にする。
-async function focusViewer() {
-  await nextTick()
-  figure.value?.focus()
+// リンクやフォームの操作はページ送りより優先する。
+function isInteractiveTarget(target: EventTarget | null) {
+  return target instanceof Element && !!target.closest(
+    'a, button, input, textarea, select, [contenteditable]',
+  )
+}
+
+// タップ・スワイプではPDF内テキストの選択も妨げない。
+// ホイールには適用しない。透明なテキストレイヤー上でもページ送りを受け付ける。
+function isPointerInteractionTarget(target: EventTarget | null) {
+  return isInteractiveTarget(target) || (target instanceof Element
+    && !!target.closest('.textLayer span, .textLayer br'))
+}
+
+function onPointerDown(event: PointerEvent) {
+  if (!event.isPrimary) {
+    gesture = null // 二本指操作ではページを送らない。
+    return
+  }
+  if (!canGestureNavigate.value || event.button !== 0 || isPointerInteractionTarget(event.target))
+    return
+
+  gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, started: performance.now(), moved: false }
+}
+
+function onPointerMove(event: PointerEvent) {
+  if (gesture?.id === event.pointerId
+    && Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y) > 10)
+    gesture.moved = true
+}
+
+function cancelGesture() {
+  gesture = null
+}
+
+// 左右スワイプは50px以上、タップは移動なし・500ms以内として判定する。
+function onPointerUp(event: PointerEvent) {
+  const start = gesture
+  gesture = null
+  if (!start || start.id !== event.pointerId || !canGestureNavigate.value
+    || isPointerInteractionTarget(event.target) || window.getSelection()?.toString())
+    return
+
+  const dx = event.clientX - start.x
+  const dy = event.clientY - start.y
+  const elapsed = performance.now() - start.started
+  let direction = 0
+  if (event.pointerType !== 'mouse' && elapsed < 1000 && Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy) * 1.5)
+    direction = dx < 0 ? 1 : -1
+  else if (!start.moved && elapsed < 500) {
+    const bounds = pageSurface.value?.getBoundingClientRect()
+    if (bounds)
+      direction = event.clientX < bounds.left + bounds.width / 2 ? -1 : 1
+  }
+
+  if (direction) {
+    goToPage(page.value + direction)
+    figure.value?.focus({ preventScroll: true })
+  }
+}
+
+// 全画面・等倍以下のみ、一定のスクロール量ごとにページ送りする。慣性中も次のページへ進める。
+function onWheel(event: WheelEvent) {
+  const area = viewport.value
+  if (!isFullscreen.value || zoom.value > 100 || !area || event.ctrlKey || event.metaKey
+    || isInteractiveTarget(event.target) || window.getSelection()?.toString()
+    || area.scrollHeight > area.clientHeight + 2 || area.scrollWidth > area.clientWidth + 2)
+    return
+
+  const now = performance.now()
+  if (now - wheelLastAt > 250) {
+    wheelTotal = 0
+  }
+  wheelLastAt = now
+  event.preventDefault()
+  if (!canGestureNavigate.value)
+    return
+
+  const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY
+  const pixels = delta * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? area.clientHeight : 1)
+  if (Math.sign(pixels) !== Math.sign(wheelTotal))
+    wheelTotal = 0
+  wheelTotal += pixels
+  if (Math.abs(wheelTotal) >= 60) {
+    goToPage(page.value + Math.sign(wheelTotal))
+    wheelTotal = 0
+  }
 }
 
 // setup時点のPropsを使って初回読み込み状態を作る。
@@ -311,7 +428,8 @@ resetDocument()
 
 <template>
   <figure ref="figure" class="pdf-slides" tabindex="0" role="group" :aria-labelledby="titleId"
-    :aria-describedby="statusId" aria-keyshortcuts="ArrowLeft ArrowRight PageUp PageDown Home End" @keydown="onKeydown">
+    :aria-describedby="`${statusId} ${helpId}`" aria-keyshortcuts="ArrowLeft ArrowRight PageUp PageDown Home End"
+    @keydown="onKeydown">
     <header class="pdf-slides__header">
       <p :id="titleId" class="pdf-slides__title">
         {{ title }}
@@ -349,8 +467,8 @@ resetDocument()
             aria-label="PDFをダウンロード" @click="downloadPdf">
             <Icon name="i-lucide-download" aria-hidden="true" />
           </button>
-          <NuxtLink class="pdf-slides__button !text-white:link !text-white:visited !text-neutral-900:hover" :href="src"
-            target="_blank" rel="noopener noreferrer" aria-label="元のPDFを別タブで開く">
+          <NuxtLink class="pdf-slides__button" :href="src" target="_blank" rel="noopener noreferrer"
+            aria-label="元のPDFを別タブで開く">
             <Icon name="i-lucide-external-link" aria-hidden="true" />
           </NuxtLink>
           <button type="button" class="pdf-slides__button" :aria-label="isFullscreen ? '全画面表示を終了' : '全画面で表示'"
@@ -359,19 +477,36 @@ resetDocument()
           </button>
         </div>
       </div>
+      <p :id="helpId" class="pdf-slides__help">
+        左右の矢印でページ移動。100%以下では左右タップ・スワイプ、全画面ではホイールも使えます。
+      </p>
     </header>
 
-    <div ref="viewport" class="pdf-slides__viewport" @dblclick="focusViewer">
+    <div ref="viewport" class="pdf-slides__viewport" @wheel="onWheel">
       <ClientOnly>
         <div v-if="isValidSource" class="pdf-slides__page-stage" :style="{
           minHeight: reservedPageHeight ? `${reservedPageHeight}px` : undefined,
         }">
           <div ref="pageSurface" class="pdf-slides__page-surface"
-            :style="{ width: renderedWidth ? `${renderedWidth}px` : '100%' }">
+            :style="{ width: renderedWidth ? `${renderedWidth}px` : '100%', touchAction: zoom <= 100 ? 'pan-y pinch-zoom' : 'auto' }"
+            @pointerdown="onPointerDown" @pointermove="onPointerMove" @pointerup="onPointerUp"
+            @pointercancel="cancelGesture" @pointerleave="cancelGesture">
             <!-- :pageの変更を検知したVuePdfEmbedが、PDF.js経由で対象ページを取得・描画する。 -->
             <VuePdfEmbed ref="pdf" class="pdf-slides__document" :source="src" :page="page" :width="renderedWidth"
               annotation-layer text-layer @loaded="onLoaded" @progress="onProgress" @rendered="onRendered"
               @loading-failed="onLoadFailed" @rendering-failed="onRenderFailed" @internal-link-clicked="goToPage" />
+            <!-- 拡大時はPDFの閲覧を優先し、ページ移動には上部の操作ボタンを使う。 -->
+            <template v-if="pageCount > 0 && !loading && !errorMessage && zoom <= 100">
+              <button type="button" class="pdf-slides__side-arrow pdf-slides__side-arrow--previous"
+                :disabled="!canGoBack || rendering" aria-label="前のページ" title="前のページ" @click.stop="goToPage(page - 1)">
+                <Icon name="i-lucide-chevron-left" aria-hidden="true" />
+              </button>
+              <button type="button" class="pdf-slides__side-arrow pdf-slides__side-arrow--next"
+                :disabled="!canGoForward || rendering" aria-label="次のページ" title="次のページ"
+                @click.stop="goToPage(page + 1)">
+                <Icon name="i-lucide-chevron-right" aria-hidden="true" />
+              </button>
+            </template>
           </div>
         </div>
 
@@ -387,7 +522,7 @@ resetDocument()
       <p v-if="isClient && loading && !errorMessage" class="pdf-slides__status">
         {{ loadingLabel }}
       </p>
-      <p v-else-if="isClient && rendering && !errorMessage" class="pdf-slides__status">
+      <p v-else-if="isClient && showRenderingStatus && !errorMessage" class="pdf-slides__status">
         {{ page }}ページを描画中...
       </p>
       <p v-if="errorMessage" class="pdf-slides__message pdf-slides__message--error" role="alert">
@@ -476,10 +611,6 @@ resetDocument()
       @apply opacity-40;
       cursor: not-allowed;
     }
-
-    &:visited {
-      @apply text-neutral-800;
-    }
   }
 
   &__button {
@@ -499,7 +630,7 @@ resetDocument()
 
     max-width: 100%;
     overscroll-behavior: contain;
-    touch-action: pan-x pan-y;
+    touch-action: pan-x pan-y pinch-zoom;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -513,6 +644,37 @@ resetDocument()
 
   &__document {
     @apply block w-full bg-white shadow-lg;
+  }
+
+  &__side-arrow {
+    @apply absolute z-10 inline-flex items-center justify-center w-11 h-11 p-0 m-0 rounded-full border border-solid border-neutral-300 opacity-40 bg-white text-neutral-900 shadow-lg text-2xl;
+
+    top: 50%;
+    transform: translateY(-50%);
+    appearance: none;
+    cursor: pointer;
+
+    &--previous {
+      left: 0.5rem;
+    }
+
+    &--next {
+      right: 0.5rem;
+    }
+
+    &:hover:not(:disabled) {
+      @apply bg-neutral-200;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      @apply opacity-40;
+      cursor: not-allowed;
+    }
   }
 
   &__status,
@@ -545,13 +707,18 @@ resetDocument()
     }
   }
 
+  &__help {
+    @apply w-full m-0 text-xs text-neutral-700;
+    font-family: var(--font-sans);
+  }
+
   @media (max-width: 768px) {
     &__header {
       @apply flex-col items-stretch gap-2 px-3;
     }
 
     &__toolbar {
-      @apply grid w-full gap-2;
+      @apply grid w-full gap-6;
 
       grid-template-columns: minmax(0, 1fr) auto auto;
     }

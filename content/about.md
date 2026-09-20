@@ -11,7 +11,7 @@ description: 小林栄太のプロフィール、関心分野、使用技術、�
   name: 小林栄太
   role: Webエンジニア / 研究者
   ---
-  # 私について (About)
+  ## 私について (About)
 
   - 広島県広島市出身 (現在は埼玉県川口市に居住)
   - 趣味： 研究・プログラミング
@@ -35,6 +35,31 @@ description: 小林栄太のプロフィール、関心分野、使用技術、�
 ::
 
 ::base-container
+## ツール・制作環境
+
+DTPやWebデザイン、文書作成などで、以下のツールを使用しています。
+
+### デザイン・DTP
+
+- Adobe Illustrator
+- Adobe InDesign
+- Adobe XD
+- Penpot
+
+### 文書・オフィス
+
+- LibreOffice
+- Google Workspace
+- Microsoft Office
+- Zotero
+
+### その他
+
+- Markdown
+- Git / GitHub
+::
+
+::base-container
 ## 現在やっていること
 
 Web開発と研究の両方に取り組んでいます。
@@ -52,7 +77,7 @@ Web開発と研究の両方に取り組んでいます。
 
   :profile-step{step="15" title="公立中学校を卒業" year="2025年3月"}
 
-  :profile-step{step="15" title="S高等学校に入学" year="2025年4月"}
+  :profile-step{step="15" title="S高等学校へ入学" year="2025年4月"}
 
   :profile-step{step="16" title="2025年第一回ネットコースLT大会 登壇（学内）" year="2025年12月"}
 

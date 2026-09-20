@@ -26,20 +26,25 @@ useSeoMeta({
 </template>
 
 <style lang="scss" scoped>
-.content-page {
-  @apply w-full pt-10;
+/*
+ * ContentRenderer配下の既定スタイルは低優先度のレイヤーへ置く。
+ * 各コンポーネントのレイヤー外scoped CSSは、セレクタ詳細度に関係なくこちらより優先される。
+ */
+@layer content {
+  .content-page {
+    @apply w-full pt-10;
 
-  &--top {
-    @apply pt-0;
+    &--top {
+      @apply pt-0;
+    }
   }
-}
 
-.content-article {
-  @apply mx-auto text-gray-800;
+  .content-article {
+    @apply mx-auto text-gray-800;
 
-  :deep(.base-container p) {
-    @apply mt-2 mb-4 text-base leading-[2];
-  }
+    :deep(.base-container p) {
+      @apply mt-2 mb-4 text-base leading-[2];
+    }
 
   :deep(.base-container h1),
   :deep(.base-container h2),
@@ -258,7 +263,7 @@ useSeoMeta({
     }
 
     >* {
-      margin: 0 !important;
+      margin: 0;
     }
 
     small {
@@ -267,5 +272,6 @@ useSeoMeta({
       color: var(--text-muted);
     }
   }
+}
 }
 </style>

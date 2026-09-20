@@ -49,7 +49,7 @@ const currentYear = new Date().getFullYear()
     <section class="contact-band" aria-labelledby="footer-contact-title">
       <div class="footer-inner contact-content">
         <h2 id="footer-contact-title">
-          研究・Web開発について
+          研究・その他のお問い合わせについて
         </h2>
         <p>お問い合わせは、コンタクトページからお気軽にご連絡ください。</p>
 
@@ -69,35 +69,17 @@ const currentYear = new Date().getFullYear()
         <p>神道学の研究と、Vue.js／Nuxtを中心としたWeb開発をしています。</p>
       </div>
     </section>
-
-    <nav class="sitemap-band" aria-labelledby="sitemap-title">
-      <div class="footer-inner">
-        <div class="sitemap-heading">
-          <p class="section-label">
-          </p>
-          <h2 id="sitemap-title">
-            人間用サイトマップ
-          </h2>
-        </div>
-
-        <div class="sitemap-grid">
-          <section v-for="group in footerGroups" :key="group.title" class="link-group">
-            <h3>{{ group.title }}</h3>
-            <ul>
-              <li v-for="link in group.links" :key="link.to">
-                <NuxtLink :to="link.to">
-                  {{ link.label }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </section>
-        </div>
-      </div>
-    </nav>
-
     <div class="copyright-band">
       <div class="footer-inner copyright-content">
-        &copy; {{ currentYear }} Eita Kobayashi
+        <div class="flex flex-col flex-items-start gap-2 items-center text-sm">
+          &copy; {{ currentYear }} Eita Kobayashi
+          <NuxtLink id="cy-effective-orcid-url"
+            class="flex gap-2 underline inline-block py-2 px-4 items-center text-white"
+            to="https://orcid.org/0009-0000-6392-4911" target="orcid.widget" rel="me noopener noreferrer">
+            <img src="https://orcid.org/sites/default/files/images/orcid_24x24.png" alt="ORCID iD icon" /> ORCID:
+            0009-0000-6392-4911
+          </NuxtLink>
+        </div>
         <BaseButton to="#top" align="end" arrow="up" class="text-sm text-white">
           ページ上部へ戻る
         </BaseButton>
@@ -124,24 +106,11 @@ const currentYear = new Date().getFullYear()
 }
 
 .contact-band {
-  background: linear-gradient(120deg,
-      color-mix(in srgb, var(--color-primary) 55%, transparent) 0%,
-      var(--color-primary) 40% 30%,
-      color-mix(in srgb, var(--color-secondary) 90%, transparent) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 50%, transparent) 0%, var(--color-primary) 20% 0%, color-mix(in srgb, var(--color-secondary) 100%, transparent) 70%);
 }
 
 .contact-content {
-  @apply flex flex-col items-center py-14 text-center px-10 bg-gray-800/50 border-rounded-full;
-
-  h2 {
-    @apply mt-2 mb-2 text-2xl font-bold;
-
-    font-family: var(--font-serif);
-  }
-
-  >p:not(.section-label) {
-    @apply m-0 text-sm text-neutral-200;
-  }
+  @apply flex flex-col items-center py-14 text-center px-10;
 }
 
 .identity-band {
@@ -163,63 +132,6 @@ const currentYear = new Date().getFullYear()
 
   img {
     @apply h-18 w-18;
-  }
-}
-
-.sitemap-band {
-  background: linear-gradient(120deg, #1c211e 0%, #151a17 55%, #101411 100%);
-}
-
-.sitemap-band>.footer-inner {
-  @apply py-16;
-}
-
-.sitemap-heading {
-  @apply mb-10 text-center;
-
-  h2 {
-    @apply mt-2 mb-0 text-3xl font-bold;
-
-    font-family: var(--font-serif);
-  }
-
-  &::after {
-    @apply block w-16 h-[3px] mx-auto mt-4 bg-primary;
-
-    content: '';
-  }
-}
-
-.sitemap-grid {
-  @apply grid grid-cols-4 gap-x-10 gap-y-12;
-}
-
-.link-group {
-  h3 {
-    @apply m-0 pb-3 text-lg font-bold border-b border-neutral-600;
-  }
-
-  ul {
-    @apply m-0 mt-4 p-0;
-    list-style: none;
-  }
-
-  li+li {
-    @apply mt-2;
-  }
-
-  a {
-    @apply inline-flex items-center text-sm text-neutral-300;
-
-    &::before {
-      @apply me-2 text-primary line-height-none;
-
-      content: '—';
-    }
-
-    &:hover {
-      @apply text-white;
-    }
   }
 }
 

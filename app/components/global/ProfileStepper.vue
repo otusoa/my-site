@@ -33,7 +33,10 @@ withDefaults(defineProps<{
 
 <style lang="scss" scoped>
 .profile-stepper {
-  @apply grid w-full max-w-3xl gap-0 my-8 p-0 list-none;
+  @apply grid w-full max-w-3xl gap-0 my-8 p-0;
 
+  @media (max-width: 768px) {
+    padding-inline-start: 0rem;
+  }
 }
 </style>

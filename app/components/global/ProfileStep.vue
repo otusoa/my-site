@@ -60,12 +60,12 @@ const resolvedStep = computed(() => props.step)
 .profile-step {
   @apply relative grid pb-7;
 
-  grid-template-columns: 2.5rem minmax(0, 1fr);
+  grid-template-columns: 3.25rem minmax(0, 1fr);
 
   &__trigger {
     @apply col-span-2 grid w-full gap-x-4 p-0 border-0 bg-transparent text-start cursor-pointer;
 
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 3.25rem minmax(0, 1fr);
     color: inherit;
 
     &:focus-visible {
@@ -77,7 +77,6 @@ const resolvedStep = computed(() => props.step)
     @apply relative z-1 flex h-10 w-10 items-center justify-center rounded-full text-md font-bold text-neutral-900;
 
     background: var(--color-primary);
-    font-family: var(--font-sans);
 
   }
 
@@ -124,15 +123,15 @@ const resolvedStep = computed(() => props.step)
 
     &,
     &__trigger {
-      grid-template-columns: 2rem minmax(0, 1fr);
+      grid-template-columns: 3.25rem minmax(0, 1fr);
     }
 
     &__trigger {
-      @apply gap-x-3;
+      @apply gap-x-4;
     }
 
     &__indicator {
-      @apply h-8 w-8 text-xs;
+      @apply h-10 w-10 text-md;
     }
 
     &__separator {

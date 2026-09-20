@@ -44,7 +44,7 @@ title: 小林栄太(eita.vue)のポートフォリオ
   align: start
   arrow: right
   text: 研究について詳しく見てみる
-  to: /about
+  to: /research
   ---
   :::
 ::
@@ -82,7 +82,7 @@ Vue.js / Nuxtを中心にWeb開発をしています。
 
     ::::base-button
     ---
-    align: end
+    align: start
     arrow: right
     text: お問い合わせ
     to: /contact
