@@ -8,11 +8,11 @@ import { StepperRoot } from 'reka-ui'
  * @example MDC
  * ```mdc
  * ::profile-stepper
- *   :::profile-step{step="1" year="2019年" title="大学での研究を開始"}
+ *   :::profile-step{:step="1" indicator="1" year="2019年" title="大学での研究を開始"}
  *   神道学と教派神道の研究に取り組み始める。
  *   :::
  *
- *   :::profile-step{step="2" year="2022年" title="Web開発を開始"}
+ *   :::profile-step{:step="2" indicator="2" year="2022年" title="Web開発を開始"}
  *   Vue.jsとNuxtを中心にWeb制作を始める。
  *   :::
  * ::

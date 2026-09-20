@@ -322,6 +322,7 @@ async function onRendered() {
   if (bounds && bounds.width > 0 && bounds.height > 0)
     pageAspectRatio.value = bounds.height / bounds.width
 
+  errorMessage.value = ''
   rendering.value = false
   if (isDocument.value && pendingDocumentPage !== null)
     scrollToDocumentPage()

@@ -1,5 +1,6 @@
 ---
-title: Slides
+title: スライド置き場
+description: 小林栄太のスライド置き場です。LTやその他のスライドを公開しています。
 ---
 
 ::base-container

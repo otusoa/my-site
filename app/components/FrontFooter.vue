@@ -53,7 +53,7 @@ const currentYear = new Date().getFullYear()
         </h2>
         <p>お問い合わせは、コンタクトページからお気軽にご連絡ください。</p>
 
-        <BaseButton to="#top" align="center" arrow="right"
+        <BaseButton to="/contact" align="center" arrow="right"
           class="text-xl py-2 px-6 font-bold border-2 border-solid border-primary">
           お問い合わせ
         </BaseButton>

@@ -73,17 +73,17 @@ Web開発と研究の両方に取り組んでいます。
 ## これまでの歩み
 
   :::profile-stepper
-  :profile-step{step="0" title="誕生" year="2009年11月11日"}
+  :profile-step{:step="1" indicator="0" title="誕生" year="2009年11月11日"}
 
-  :profile-step{step="15" title="公立中学校を卒業" year="2025年3月"}
+  :profile-step{:step="2" indicator="15" title="公立中学校を卒業" year="2025年3月"}
 
-  :profile-step{step="15" title="S高等学校へ入学" year="2025年4月"}
+  :profile-step{:step="3" indicator="15" title="S高等学校へ入学" year="2025年4月"}
 
-  :profile-step{step="16" title="2025年第一回ネットコースLT大会 登壇（学内）" year="2025年12月"}
+  :profile-step{:step="4" indicator="16" title="2025年第一回ネットコースLT大会 登壇（学内）" year="2025年12月"}
 
-  :profile-step{step="16" title="2025年第二回ネットコースLT大会 登壇（学内）" year="2026年3月"}
+  :profile-step{:step="5" indicator="16" title="2025年第二回ネットコースLT大会 登壇（学内）" year="2026年3月"}
 
-  :profile-step{step="16" title="学内での合同LT大会 登壇（学内）" year="2026年8月"}
+  :profile-step{:step="6" indicator="16" title="学内での合同LT大会 登壇（学内）" year="2026年8月"}
   :::
 
   :::base-button

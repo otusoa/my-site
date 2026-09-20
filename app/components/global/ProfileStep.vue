@@ -14,26 +14,25 @@ import {
  *
  * @example MDC
  * ```mdc
- * ::profile-step{step="1" year="2022年" title="Web開発を開始"}
+ * ::profile-step{:step="1" indicator="15" year="2022年" title="Web開発を開始"}
  * Vue.jsとNuxtを中心にWeb制作を始める。
  * ::
  * ```
  */
-const props = defineProps<{
-  step?: string
+defineProps<{
+  step: number
+  indicator?: string | number
   year: string
   title: string | number
 }>()
-
-const resolvedStep = computed(() => props.step)
 </script>
 
 <template>
-  <StepperItem class="profile-step" as="li" :step="resolvedStep">
+  <StepperItem class="profile-step" as="li" :step="step">
     <StepperTrigger class="profile-step__trigger">
       <StepperIndicator class="profile-step__indicator">
-        <template v-if="resolvedStep || resolvedStep === 0">
-          <span aria-hidden="true">{{ resolvedStep }}</span>
+        <template v-if="indicator !== undefined">
+          <span aria-hidden="true">{{ indicator }}</span>
         </template>
         <template v-else>
           <Icon name="i-lucide-message-circle" aria-hidden="true" />
