@@ -9,11 +9,24 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+const description = page.value.description ?? '小林栄太(eita.vue)のリンク集'
+
 useSeoMeta({
   title: page.value.title,
-  description: page.value.description ?? "小林栄太(eita.vue)のリンク集",
+  description,
   ogTitle: page.value.title,
-  ogDescription: page.value.description ?? "小林栄太(eita.vue)のリンク集",
+  ogDescription: description,
+  twitterCard: 'summary_large_image',
+})
+
+defineOgImage('Main', {
+  title: page.value.title,
+  description,
+  path: route.path,
+}, {
+  width: 1200,
+  height: 630,
+  alt: `${page.value.title} — 小林栄太のポートフォリオサイト`,
 })
 </script>
 

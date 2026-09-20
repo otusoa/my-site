@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -19,12 +20,16 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
+  site: {
+    url: 'https://eita.ptmi.jp',
+    name: '小林栄太のポートフォリオサイト',
+  },
   studio: {
     repository: {
       provider: 'github',
       owner: 'otusoa',
       repo: 'my-site',
-      branch: 'refactor/v2',
+      branch: 'main',
     },
     media: {
       external: true,

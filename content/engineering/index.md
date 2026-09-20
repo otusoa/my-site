@@ -1,3 +1,8 @@
+---
+title: エンジニアリング
+description: Vue.js・Nuxtを中心としたWeb開発、UI設計、認証・認可、これまでの制作物について紹介します。
+---
+
 ::base-container
 ## エンジニアリング
 

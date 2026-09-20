@@ -4,7 +4,7 @@ import 'vue-pdf-embed/dist/styles/annotationLayer.css'
 import 'vue-pdf-embed/dist/styles/textLayer.css'
 
 /**
- * PDFを1ページずつ表示する、スライド向けのビューアー。
+ * スライドの1ページ表示と、横書き文書の縦スクロール表示に対応するPDFビューアー。
  * 前後移動、拡大縮小、全画面、ダウンロードに対応する。
  *
  * @example Vue
@@ -18,6 +18,9 @@ import 'vue-pdf-embed/dist/styles/textLayer.css'
  *   <p>発表資料の概要や、PDFを開けない場合の補足説明。</p>
  * </PdfSlides>
  * ```
+ *
+ * 文章モード: <PdfSlides src="https://example.com/paper.pdf" title="論文" mode="document" />
+ * MDCでも mode="document" を指定する。省略時は従来のスライド表示。
  *
  * @example MDC
  * ```mdc
@@ -33,10 +36,13 @@ const props = withDefaults(defineProps<{
   title: string
   /** 最初に表示するページ番号。 */
   startPage?: number | string
+  /** slides: 1ページずつ表示。document: 横幅に合わせた縦スクロール表示。 */
+  mode?: 'slides' | 'document'
   /** ダウンロード時のファイル名。 */
   downloadName?: string
 }>(), {
   startPage: 1,
+  mode: 'slides',
   downloadName: undefined,
 })
 
@@ -69,7 +75,9 @@ const titleId = `pdf-slides-title-${id}`
 const statusId = `pdf-slides-status-${id}`
 const helpId = `pdf-slides-help-${id}`
 // PDFの表示状態。loadingは文書取得、renderingは各ページのCanvas描画を表す。
+const isDocument = computed(() => props.mode === 'document')
 const page = ref(normalizePage(props.startPage))
+let pendingDocumentPage: number | null = page.value
 const pageCount = ref(0)
 const zoom = ref(100)
 const loading = ref(true)
@@ -87,7 +95,7 @@ let renderingStatusTimer: ReturnType<typeof setTimeout> | undefined
 let gesture: { id: number, x: number, y: number, started: number, moved: boolean } | null = null
 let wheelTotal = 0
 let wheelLastAt = 0
-const canGestureNavigate = computed(() => zoom.value <= 100 && pageCount.value > 0
+const canGestureNavigate = computed(() => !isDocument.value && zoom.value <= 100 && pageCount.value > 0
   && !loading.value && !rendering.value && !errorMessage.value)
 
 // PDF.jsへ渡す前に、公開HTTPS URLであることを確認する。
@@ -102,12 +110,12 @@ const isValidSource = computed(() => {
 const canGoBack = computed(() => page.value > 1)
 const canGoForward = computed(() => pageCount.value > 0 && page.value < pageCount.value)
 
-// 通常表示は横幅を基準にし、全画面表示では縦横の両方に収まる幅を基準にする。
+// 文書は常に横幅を基準にし、スライドの全画面表示は縦横の両方に収める。
 const fittedWidth = computed(() => {
   if (viewportWidth.value <= 0)
     return undefined
 
-  if (!isFullscreen.value || viewportHeight.value <= 0 || !pageAspectRatio.value)
+  if (isDocument.value || !isFullscreen.value || viewportHeight.value <= 0 || !pageAspectRatio.value)
     return viewportWidth.value
 
   const widthLimitedByHeight = viewportHeight.value / pageAspectRatio.value
@@ -158,14 +166,25 @@ watch(() => props.src, resetDocument)
 
 // Studioや親コンポーネントから初期ページが変更された場合にも追従する。
 watch(() => props.startPage, (value) => {
-  page.value = clampPage(normalizePage(value))
+  goToPage(normalizePage(value))
+})
+
+watch(isDocument, () => {
+  cancelGesture()
+  wheelTotal = 0
+  pendingDocumentPage = page.value
+  if (pageCount.value > 0)
+    rendering.value = true
 })
 
 // ページ番号または描画幅が変わると、VuePdfEmbedが次ページの取得・Canvas描画を始める。
 // ここでは描画開始を表す状態だけを立て、完了はonRendered()で受け取る。
 watch([page, renderedWidth], ([newPage, newWidth], [oldPage, oldWidth]) => {
-  if (pageCount.value > 0 && (newPage !== oldPage || newWidth !== oldWidth))
+  if (pageCount.value > 0 && ((!isDocument.value && newPage !== oldPage) || newWidth !== oldWidth)) {
+    if (isDocument.value)
+      pendingDocumentPage = page.value
     rendering.value = true
+  }
 })
 
 // ページ描画が2秒を超えた場合だけローディング表示を出す。
@@ -219,6 +238,8 @@ function clearRenderingStatusTimer() {
 // PDF URL変更時と初期化時に、文書単位の読み込み状態をリセットする。
 function resetDocument() {
   page.value = normalizePage(props.startPage)
+  pendingDocumentPage = page.value
+  pageAspectRatio.value = null
   pageCount.value = 0
   loading.value = true
   rendering.value = false
@@ -226,9 +247,44 @@ function resetDocument() {
   errorMessage.value = isValidSource.value ? '' : 'HTTPS形式のPDF URLを指定してください。'
 }
 
-// pageの更新がVuePdfEmbedの:pageへ伝わり、ライブラリ内部の次ページ取得が開始される。
+// スライドは描画ページを切り替え、文書は対象ページまでスクロールする。
 function goToPage(nextPage: number) {
   page.value = clampPage(nextPage)
+  if (isDocument.value) {
+    pendingDocumentPage = page.value
+    if (!loading.value && !rendering.value)
+      scrollToDocumentPage()
+  }
+}
+
+// 全ページ表示ではページ番号の変更で再描画せず、ビューアー内だけをスクロールする。
+function scrollToDocumentPage() {
+  const area = viewport.value
+  const target = pageSurface.value?.querySelectorAll<HTMLElement>('.vue-pdf-embed__page')[(pendingDocumentPage ?? page.value) - 1]
+  if (!area || !target)
+    return
+
+  area.scrollTop += target.getBoundingClientRect().top - area.getBoundingClientRect().top
+  pendingDocumentPage = null
+}
+
+// 上端を通過したページを現在ページとしてツールバーへ反映する。
+function onDocumentScroll() {
+  if (!isDocument.value || loading.value || rendering.value || pendingDocumentPage !== null || !viewport.value)
+    return
+
+  const pages = pageSurface.value?.querySelectorAll<HTMLElement>('.vue-pdf-embed__page')
+  if (!pages?.length)
+    return
+
+  const top = viewport.value.getBoundingClientRect().top
+  let currentPage = 1
+  for (const [index, element] of pages.entries()) {
+    if (element.getBoundingClientRect().top > top + 24)
+      break
+    currentPage = index + 1
+  }
+  page.value = currentPage
 }
 
 // 25%刻みの変更を受け取り、許可範囲の50〜200%に収める。
@@ -240,6 +296,7 @@ function changeZoom(amount: number) {
 function onLoaded(document: PdfDocument) {
   pageCount.value = document.numPages
   page.value = clampPage(page.value)
+  pendingDocumentPage = page.value
   loading.value = false
   rendering.value = true
   progress.value = 100
@@ -266,6 +323,8 @@ async function onRendered() {
     pageAspectRatio.value = bounds.height / bounds.width
 
   rendering.value = false
+  if (isDocument.value && pendingDocumentPage !== null)
+    scrollToDocumentPage()
 }
 
 // PDF文書そのものを取得できなかった場合の状態を確定する。
@@ -316,6 +375,23 @@ function updateFullscreenState() {
 function onKeydown(event: KeyboardEvent) {
   if (event.target !== event.currentTarget)
     return
+
+  if (isDocument.value && viewport.value) {
+    const area = viewport.value
+    const scrollAmounts: Partial<Record<string, number>> = {
+      ArrowUp: -40,
+      ArrowDown: 40,
+      PageUp: -area.clientHeight * 0.9,
+      PageDown: area.clientHeight * 0.9,
+      ' ': area.clientHeight * (event.shiftKey ? -0.9 : 0.9),
+    }
+    const amount = scrollAmounts[event.key]
+    if (amount !== undefined) {
+      event.preventDefault()
+      area.scrollTop += amount
+      return
+    }
+  }
 
   const actions: Partial<Record<string, () => void>> = {
     ArrowLeft: () => goToPage(page.value - 1),
@@ -397,7 +473,7 @@ function onPointerUp(event: PointerEvent) {
 // 全画面・等倍以下のみ、一定のスクロール量ごとにページ送りする。慣性中も次のページへ進める。
 function onWheel(event: WheelEvent) {
   const area = viewport.value
-  if (!isFullscreen.value || zoom.value > 100 || !area || event.ctrlKey || event.metaKey
+  if (isDocument.value || !isFullscreen.value || zoom.value > 100 || !area || event.ctrlKey || event.metaKey
     || isInteractiveTarget(event.target) || window.getSelection()?.toString()
     || area.scrollHeight > area.clientHeight + 2 || area.scrollWidth > area.clientWidth + 2)
     return
@@ -427,7 +503,7 @@ resetDocument()
 </script>
 
 <template>
-  <figure ref="figure" class="pdf-slides" tabindex="0" role="group" :aria-labelledby="titleId"
+  <figure ref="figure" class="pdf-slides" :class="{ 'pdf-slides--document': isDocument }" tabindex="0" role="group" :aria-labelledby="titleId"
     :aria-describedby="`${statusId} ${helpId}`" aria-keyshortcuts="ArrowLeft ArrowRight PageUp PageDown Home End"
     @keydown="onKeydown">
     <header class="pdf-slides__header">
@@ -435,7 +511,7 @@ resetDocument()
         {{ title }}
       </p>
 
-      <div class="pdf-slides__toolbar" aria-label="PDFスライドの操作">
+      <div class="pdf-slides__toolbar" aria-label="PDFの操作">
         <div class="pdf-slides__controls pdf-slides__controls--pages" role="group" aria-label="ページ移動">
           <button type="button" class="pdf-slides__button" :disabled="!canGoBack" aria-label="前のページ"
             @click="goToPage(page - 1)">
@@ -478,25 +554,30 @@ resetDocument()
         </div>
       </div>
       <p :id="helpId" class="pdf-slides__help">
-        左右の矢印でページ移動。100%以下では左右タップ・スワイプ、全画面ではホイールも使えます。
+        <template v-if="isDocument">
+          縦スクロールで読み進められます。左右の矢印でページ移動、拡大・縮小で文字の大きさを調整できます。
+        </template>
+        <template v-else>
+          左右の矢印でページ移動。100%以下では左右タップ・スワイプ、全画面ではホイールも使えます。
+        </template>
       </p>
     </header>
 
-    <div ref="viewport" class="pdf-slides__viewport" @wheel="onWheel">
+    <div ref="viewport" class="pdf-slides__viewport" @wheel="onWheel" @scroll.passive="onDocumentScroll">
       <ClientOnly>
         <div v-if="isValidSource" class="pdf-slides__page-stage" :style="{
-          minHeight: reservedPageHeight ? `${reservedPageHeight}px` : undefined,
+          minHeight: !isDocument && reservedPageHeight ? `${reservedPageHeight}px` : undefined,
         }">
           <div ref="pageSurface" class="pdf-slides__page-surface"
-            :style="{ width: renderedWidth ? `${renderedWidth}px` : '100%', touchAction: zoom <= 100 ? 'pan-y pinch-zoom' : 'auto' }"
+            :style="{ width: renderedWidth ? `${renderedWidth}px` : '100%', touchAction: !isDocument && zoom <= 100 ? 'pan-y pinch-zoom' : 'auto' }"
             @pointerdown="onPointerDown" @pointermove="onPointerMove" @pointerup="onPointerUp"
             @pointercancel="cancelGesture" @pointerleave="cancelGesture">
-            <!-- :pageの変更を検知したVuePdfEmbedが、PDF.js経由で対象ページを取得・描画する。 -->
-            <VuePdfEmbed ref="pdf" class="pdf-slides__document" :source="src" :page="page" :width="renderedWidth"
+            <!-- 文書モードは全ページを縦に並べ、スライドモードは指定ページを描画する。 -->
+            <VuePdfEmbed ref="pdf" class="pdf-slides__document" :source="src" :page="isDocument ? undefined : page" :width="renderedWidth"
               annotation-layer text-layer @loaded="onLoaded" @progress="onProgress" @rendered="onRendered"
               @loading-failed="onLoadFailed" @rendering-failed="onRenderFailed" @internal-link-clicked="goToPage" />
             <!-- 拡大時はPDFの閲覧を優先し、ページ移動には上部の操作ボタンを使う。 -->
-            <template v-if="pageCount > 0 && !loading && !errorMessage && zoom <= 100">
+            <template v-if="!isDocument && pageCount > 0 && !loading && !errorMessage && zoom <= 100">
               <button type="button" class="pdf-slides__side-arrow pdf-slides__side-arrow--previous"
                 :disabled="!canGoBack || rendering" aria-label="前のページ" title="前のページ" @click.stop="goToPage(page - 1)">
                 <Icon name="i-lucide-chevron-left" aria-hidden="true" />
@@ -523,7 +604,7 @@ resetDocument()
         {{ loadingLabel }}
       </p>
       <p v-else-if="isClient && showRenderingStatus && !errorMessage" class="pdf-slides__status">
-        {{ page }}ページを描画中...
+        {{ isDocument ? '文書' : `${page}ページ` }}を描画中...
       </p>
       <p v-if="errorMessage" class="pdf-slides__message pdf-slides__message--error" role="alert">
         {{ errorMessage }}
@@ -558,6 +639,27 @@ resetDocument()
       @apply flex-1;
 
       min-height: 0;
+    }
+  }
+
+  &--document {
+    .pdf-slides__viewport {
+      height: 75vh;
+      height: 75dvh;
+      scrollbar-gutter: stable;
+    }
+
+    .pdf-slides__document {
+      background: transparent;
+      box-shadow: none;
+    }
+
+    :deep(.vue-pdf-embed > div + div) {
+      margin-top: 1rem;
+    }
+
+    :deep(.vue-pdf-embed__page) {
+      background: white;
     }
   }
 
