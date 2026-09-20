@@ -1,18 +1,9 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <UPage>
-    <FrontHeader />
+  <div id="top">
+    <BaseSticky v-slot="{ stickyClass, stickyStyle }" :breakpoint="1024" top="0rem">
+      <FrontHeader :class="[stickyClass, 'z-50']" :style="stickyStyle" />
+    </BaseSticky>
     <slot />
     <FrontFooter />
-  </UPage>
+  </div>
 </template>
-
-<style scoped>
-body {
-  margin: 0;
-  padding: 0;
-}
-</style>

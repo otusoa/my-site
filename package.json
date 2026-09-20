@@ -9,13 +9,29 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@nuxt/content": "^3.12.0",
-    "@nuxt/eslint": "1.15.2",
-    "@nuxt/fonts": "0.14.0",
-    "@nuxt/ui": "^4.5.1",
-    "better-sqlite3": "^12.6.2",
-    "nuxt": "^4.4.2",
-    "pita-css": "^0.6.4",
-    "tailwindcss": "^4.2.1"
-  }
+    "@nuxt/content": "^3.16.0",
+    "@nuxt/eslint": "^1.15.2",
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/icon": "2.5.1",
+    "@nuxt/image": "2.1.0",
+    "@nuxthub/core": "^0.10.8",
+    "@nuxtjs/seo": "5.3.16",
+    "@takumi-rs/core": "^2.14.0",
+    "@vueuse/core": "^14.4.0",
+    "@vueuse/nuxt": "14.4.0",
+    "aws4fetch": "^1.0.20",
+    "better-sqlite3": "^12.11.1",
+    "nuxt": "^4.5.2",
+    "nuxt-og-image": "^6.8.0",
+    "nuxt-studio": "1.7.0",
+    "reka-ui": "^2.10.4",
+    "vue": "^3.5.42",
+    "vue-pdf-embed": "2.1.6"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^66.8.1",
+    "sass-embedded": "^1.103.1",
+    "unocss": "^66.8.1"
+  },
+  "packageManager": "pnpm@12.0.0"
 }

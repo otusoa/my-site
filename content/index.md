@@ -1,179 +1,94 @@
 ---
-title: 小林栄太のリンク集
+title: 小林栄太(eita.vue)のポートフォリオ
+sitemap:
+  loc: /
 ---
 
-::TheHero
+:top-hero
+
+::base-container
+## 私について
+
+  :::profile-card
+  ---
+  handle: S高 5期生 (高校2年生)
+  image: /eita.svg
+  name: 小林栄太
+  role: 研究者 / Webエンジニア
+  ---
+  エンジニアリングでは Vue.js / Nuxt を中心に、UI設計や認証・認可、UIライブラリ作りに関心があります。
+
+  研究では、神理教を中心に、近代日本の宗教思想・教義について調べています。
+  :::
+
+:base-button{arrow="right" text="eita.vueについて詳しく見てみる" to="/about"}
 ::
 
-::TheSection
-## About me
+::base-container
+## 研究
 
-なんかVue.jsとNuxtを触ってる人です。
-最近は認証認可サーバー作ってます。
+教派神道、特に神理教を中心として、近代日本における宗教思想・教義について研究しています。
+現在は、神理教やその教祖である佐野経彦を主な対象としながら、教義の形成、近代における神道思想について関心を持っています。
 
-中学のとき、WordPressで簡単なテーマを自作しブログを運用したりしてたのが、プログラミングをやり始めたきっかけです。
+### 現在の主な関心
 
-- TypeScript
-  - Vue.js(Nuxt) ←メインはこっち
-    かれこれ1年ぐらいやってます。
-  - React(Next.js) 最近はじめた
-- HTML/CSS
-- PHP 昔やってたので、構文はある程度わかります。
+- 神理教
+  - 佐野経彦
+- 古神道
 
-~~CSS極めてましたが、最近はTailwindCSSばっかり使ってます。~~
+### 最近の研究
 
-::
----
-::TheSection
+- 『御教誡』に見る神理教の生活倫理
+- 佐野経彦と神理教の思想史的位置づけに関する考察
 
-## 最近やってること
-
-Lism CSSというCSSフレームワークベースのVue.js向けに改良したものを作ってます。
-
-Nuxt用モジュールも作成しており、Nuxtプロジェクトでも簡単に導入できます。
-
-本家 <https://lism-css.com/>
-
-私が作ったUIライブラリ https://github.com/otusoa/lism-ui-vue
-
-###
-
-::card
----
-title: Lism CSS Vue
-icon: i-tabler-file-type-css
-to: https://github.com/otusoa/lism-ui-vue
-target: _blank
----
-Lism CSSをベースにしたVue.jsのUIライブラリです。
+  :::base-button
+  ---
+  align: start
+  arrow: right
+  text: 研究について詳しく見てみる
+  to: /research
+  ---
+  :::
 ::
 
+::base-container
+## エンジニアリング
+
+Vue.js / Nuxtを中心にWeb開発をしています。
+また、CSSが昔から得意です。
+
+フロントエンドだけでなく、UI設計や認証・認可の仕組みにも関心があり、実際のWebサービスや基盤の開発を趣味で通して学んでいます。
+
+### 主な制作
+
+- PitaMaiアカウント / 組織内の認証・認可基盤
+- LismUI-Vue / LismCSSをベースとした、Vue.js向けのラッパー兼UIフレームワーク
+
+  :::base-button
+  ---
+  align: start
+  arrow: right
+  text: 制作物を見る
+  to: /engineering#%E5%88%B6%E4%BD%9C%E7%89%A9project
+  ---
+  :::
+
+  :::base-container
+  ## お問い合わせ
+
+  研究やWeb開発についてのご連絡は、コンタクトページ、または以下のメールアドレスからお願いします
+
+  `eita[at]ptmi.jp`
+
+  (`[at]`を@に置き換え、問い合わせください。)
+
+    ::::base-button
+    ---
+    align: start
+    arrow: right
+    text: お問い合わせ
+    to: /contact
+    ---
+    ::::
+  :::
 ::
----
-
-:::TheSection
-
-## リンク集(Project)
-
-::card-group
-
-::card
----
-title: Lism CSS Vue
-icon: i-tabler-file-type-css
-to: https://github.com/otusoa/lism-ui-vue
-target: _blank
----
-Lism CSSをベースにしたVue.jsのUIライブラリです。
-::
-
-::card
----
-title: 自作クラスレスCSSフレームワーク
-icon: i-tabler-file-type-css
-to: https://css.pitahex.com
-target: _blank
----
-ドキュメント型サイトに最適化されたClassレスベースのCSSフレームワークです。
-(最近はあんまり動かしていないので、Lism CSSのVue版の方をよく触ってる)
-::
-
-::card
----
-title: 簡単な自作テーマで作ったWordPressの技術ブログ
-icon: i-ic-baseline-wordpress
-to: https://www.pitahex.com
-target: _blank
----
-中学生のとき作りました。雑記の技術ブログです。(アーカイブ済み)
-::
-
-::card
----
-title: 自作のコミュニティ内の認証, 認可サーバー
-icon: i-simple-icons-betterauth
-to: https://github.com/PitaMai-Technology/pitamai-account
-target: _blank
----
-Better Authを基盤に作成されています。
-::
-
-::card
----
-title: 私のコミュニティ
-icon: i-lucide-users-round
-to: https://pitamai.com
-target: _blank
----
-「共同創作コミュニティ」です。
-アプリ開発やプログラミングに限定せず、メンバーが「これ作ってみたいね」「面白そうだ！」と盛り上がったアイデアを、協力し合いながら形にしていくことを最も大切にしています。
-::
-
-::card
----
-title: MicroCMS（ヘッドレスCMS）を用いたブログのリポジトリ
-icon: i-lucide-github
-to: https://github.com/PitaMai-Technology/blogs
-target: _blank
----
-大昔に作ったので、あまり綺麗なコードではないですが、MicroCMSを用いたブログのリポジトリです。
-::
-
-::card
----
-title: Qiita
-icon: i-simple-icons-qiita
-to: https://qiita.com/eita_kobayashi
-target: _blank
----
-主にVue.jsやNuxtに関する技術情報を発信しています。
-::
-
-::
-:::
-
-:::TheSection
-## 私のデザイン
-
-どちらかというと、アニメのサイトのような派手なUIとかは作れないです。
-ですが、見やすいUIは昔から得意です。
-
-### 私が作った技術ブログのUI
-
-1からCSSを作って作成した技術ブログのUIです。
-
-![Image](/ui2.png)
-
-***
-
-### 認証認可サーバーのダッシュボードUI
-
-Nuxt UIを用いて作成しています。
-
-![Image](/dashboard-ui.png)
-
-![Image](/ui5.png)
-
-
-***
-
-### MicroCMSを用いたブログのUI
-
-localhostなのでURLはないですが、UIのスクショだけ載せておきます。
-これも1からCSSを作っています
-
-![Image](/ui3.png)
-
-![Image](/ui4.png)
-
-:::
-
-***
-
-:::TheSection
-
-## 連絡先
-- mail: eita{at}pitamai.com
-
-( {at}をアットマークに置き換えてお問い合わせください。)
-:::

@@ -1,0 +1,97 @@
+---
+title: 私について
+description: 小林栄太のプロフィール、関心分野、使用技術、これまでの歩み。
+---
+
+::base-container
+  :::profile-card
+  ---
+  handle: S高 5期生 (高校2年生)
+  image: /eita.svg
+  name: 小林栄太
+  role: Webエンジニア / 研究者
+  ---
+  ## 私について (About)
+
+  - 広島県広島市出身 (現在は埼玉県川口市に居住)
+  - 趣味： 研究・プログラミング
+
+  神道学の研究と、Vue.js／Nuxtを中心としたWeb開発をしています。
+
+  エンジニアリングでは Vue.js ／ Nuxt を中心にWeb開発を行っており、
+  UI設計や認証・認可など、Webサービスを支える仕組みに関心があります。
+  実際にサービスやツールを開発しながら、必要な技術を学んでいます。
+
+  研究では、教派神道、とくに神理教を主な対象として、
+  近代日本における宗教思想や教義について調べています。
+  史料を読みながら、教義がどのように形成され、
+  人々の生活や思想とどのように結びついていたのかを考えることに関心があります。
+
+  Web開発と神道学は、一見するとかなり離れた分野に見えるかもしれません。
+  しかしながら、自分の中ではどちらも、論理的思考をかなり使うので、実はかなり共通点が多いと思っています。
+
+  現在も、研究とエンジニアリングの両方を続けながら、初心を忘れず、興味を持ったことを色々探求し続けています。
+  :::
+::
+
+::base-container
+## ツール・制作環境
+
+DTPやWebデザイン、文書作成などで、以下のツールを使用しています。
+
+### デザイン・DTP
+
+- Adobe Illustrator
+- Adobe InDesign
+- Adobe XD
+- Penpot
+
+### 文書・オフィス
+
+- LibreOffice
+- Google Workspace
+- Microsoft Office
+- Zotero
+
+### その他
+
+- Markdown
+- Git / GitHub
+::
+
+::base-container
+## 現在やっていること
+
+Web開発と研究の両方に取り組んでいます。
+
+エンジニアリングでは、UI設計やフロントエンド開発、認証・認可などに関心があり、複数のプロジェクトをしています。
+
+研究では、教派神道を中心に、近代日本の宗教思想や教義について調べて、研究ノートや研究論文にしています。
+::
+
+::base-container
+## これまでの歩み
+
+  :::profile-stepper
+  :profile-step{:step="1" indicator="0" title="誕生" year="2009年11月11日"}
+
+  :profile-step{:step="2" indicator="15" title="公立中学校を卒業" year="2025年3月"}
+
+  :profile-step{:step="3" indicator="15" title="S高等学校へ入学" year="2025年4月"}
+
+  :profile-step{:step="4" indicator="16" title="2025年第一回ネットコースLT大会 登壇（学内）" year="2025年12月"}
+
+  :profile-step{:step="5" indicator="16" title="2025年第二回ネットコースLT大会 登壇（学内）" year="2026年3月"}
+
+  :profile-step{:step="6" indicator="16" title="学内での合同LT大会 登壇（学内）" year="2026年8月"}
+  :::
+
+  :::base-button
+  ---
+  align: center
+  label: スライドへ行くボタン
+  text: スライドはこちら
+  to: /engineering/slides
+  ---
+  :::
+::
