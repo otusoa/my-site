@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxthub/core',
     '@vueuse/nuxt',
     'nuxt-studio',
+    '@nuxt/scripts',
   ],
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
@@ -18,6 +19,14 @@ export default defineNuxtConfig({
   router: {
     options: {
       scrollBehaviorType: 'smooth',
+    },
+  },
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: 'G-S9NJLGHKTC',
+        trigger: 'onNuxtReady',
+      },
     },
   },
   site: {
