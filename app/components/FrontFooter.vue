@@ -9,6 +9,10 @@ type FooterGroup = {
   links: FooterLink[]
 }
 
+defineEmits<{
+  openCookieSettings: []
+}>()
+
 const footerGroups: FooterGroup[] = [
   {
     title: 'このサイト',
@@ -79,6 +83,14 @@ const currentYear = new Date().getFullYear()
             <img src="https://orcid.org/sites/default/files/images/orcid_24x24.png" alt="ORCID iD icon" /> ORCID:
             0009-0000-6392-4911
           </NuxtLink>
+          <nav class="privacy-links" aria-label="プライバシー設定">
+            <NuxtLink to="/privacy">
+              プライバシーとCookie
+            </NuxtLink>
+            <button type="button" @click="$emit('openCookieSettings')">
+              Cookie設定
+            </button>
+          </nav>
         </div>
         <BaseButton to="#top" align="end" arrow="up" class="text-sm text-white">
           ページ上部へ戻る
@@ -141,6 +153,18 @@ const currentYear = new Date().getFullYear()
 
 .copyright-content {
   @apply flex items-center justify-between gap-6 py-5;
+}
+
+.privacy-links {
+  @apply flex flex-wrap items-center justify-center gap-x-5 gap-y-2;
+
+  a,
+  button {
+    @apply m-0 border-0 bg-transparent p-0 text-sm text-white underline cursor-pointer;
+
+    font-family: inherit;
+    text-underline-offset: 0.2em;
+  }
 }
 
 @media (max-width: 800px) {
