@@ -109,7 +109,7 @@ onMounted(() => {
             をご確認ください。
           </p>
 
-          <div class="mt-6">
+          <div class="mt-6" v-if="consentChoice !== null">
             <p class="consent-banner__status" role="status">
               <template v-if="consentChoice === 'denied'">
                 <span>現在、アクセス解析Cookieを拒否しています。
@@ -144,7 +144,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .consent-banner {
-  @apply bg-green-200 text-gray-900;
+  @apply bg-green-200/80 text-gray-900;
   inset-inline: 0;
   inset-block-end: 0;
 

@@ -9,7 +9,7 @@ const isCookieSettingsOpen = ref(false)
     </BaseSticky>
     <slot />
     <FrontFooter @open-cookie-settings="isCookieSettingsOpen = true" />
-    <BaseSticky v-slot="{ stickyClass, stickyStyle }" :breakpoint="1024" top="0rem">
+    <BaseSticky v-slot="{ stickyClass, stickyStyle }" breakpoint="0" top="0rem">
       <CookieConsentBanner :class="[stickyClass, 'z-60']" v-model:open="isCookieSettingsOpen" :style="stickyStyle" />
     </BaseSticky>
   </div>
