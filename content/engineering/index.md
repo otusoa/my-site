@@ -7,13 +7,23 @@ description: Vue.js・Nuxtを中心としたWeb開発、UI設計、認証・認�
 ## エンジニアリング
 
   :::profile-stepper
-    ::::profile-step{:step="1" title="はじめてのいっぽ" year="中学2年生 HTML / CSS Webサイトを作る楽しさ"}
+    ::::profile-step
+    ---
+    step: 1
+    title: はじめてのいっぽ
+    year: 中学2年生 HTML / CSS Webサイトを作る楽しさ
+    ---
     中学2年生の頃、Minecraft配布マップの公式Webサイトを色々調べながら作り、達成感を覚え、Web系、特にCSS(とHTML)へ強い興味を抱き、HTML,CSSの基礎固めする。
 
     その頃、ブログというものに興味が湧きWordPressなるものを知る...
     ::::
 
-    ::::profile-step{:step="2" title="ステップアップ" year="中学3年生 PHP / WordPress CMS・動的サイト"}
+    ::::profile-step
+    ---
+    step: 2
+    title: ステップアップ
+    year: 中学3年生 PHP / WordPress CMS・動的サイト
+    ---
     ![スクリーンショット-2026-08-31-121311](https://r2.eita.ptmi.jp/content/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88-2026-08-31-121311.png){.border-1.border-gray-800.border-solid height="" width=""}
 
     HTMLとCSSだけでは、できることに限界があったので次になぜかバックエンド系のPHPを学び始める。
@@ -29,7 +39,12 @@ description: Vue.js・Nuxtを中心としたWeb開発、UI設計、認証・認�
     現在はアーカイブされています。
     ::::
 
-    ::::profile-step{:step="3" title="フロントエンドへ" year="高校1年生 Vue.js / Nuxt コンポーネント指向"}
+    ::::profile-step
+    ---
+    step: 3
+    title: フロントエンドへ
+    year: 高校1年生 Vue.js / Nuxt コンポーネント指向
+    ---
     WordPressからもっとステップアップしたいと考え、Laravelなどいじってみたがあまり肌に合わず。
 
     UIを作ることが好きだったので、色々なUIフレームワークがあって、面白そうなWebフロントエンド系に方向をチェンジしてみる。
@@ -140,4 +155,10 @@ pnpm add @lism-ui-vue/nuxt
 両者とも、まだalpha版です。
 
 <https://github.com/otusoa/lism-ui-vue>
+::
+
+::base-container
+## リンク集
+
+GitHub： <https://github.com/otusoa/>
 ::
