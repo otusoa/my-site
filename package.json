@@ -21,7 +21,7 @@
     "@vueuse/core": "^14.4.0",
     "@vueuse/nuxt": "14.4.0",
     "aws4fetch": "^1.0.20",
-    "better-sqlite3": "^12.11.1",
+    "better-sqlite3": "^13.0.0",
     "nuxt": "^4.5.2",
     "nuxt-og-image": "^6.8.0",
     "nuxt-studio": "1.7.0",
