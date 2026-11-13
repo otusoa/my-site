@@ -8,6 +8,20 @@ description: 小林栄太のスライド置き場です。LTやその他のス�
 
 ## LT
 
+### Vue.jsしか知らなかった人が、いきなりNext.jsのチーム開発に飛び込んだお話。
+
+2026/11/10
+
+<https://cyberagent.connpass.com/event/410697/>
+
+上記のイベントにて、サイバーエージェントで角川ドワンゴ学園 生徒LTの登壇枠で発表したスライドです。
+
+Vue.jsを中心に開発していた私が、React・Next.js未経験のまま、Next.jsスタックでの磁石祭2026のWebアプリ開発に参加した経験を紹介しています。
+
+初めてのチーム開発を通じて経験したことを主に綴っています。
+
+:iframe{allowFullScreen="true" height="349" src="https://www.docswell.com/slide/53JW6Y/embed" style="border: 1px solid #ccc; display: block; margin: 0px auto; padding: 0px; visibility: visible;" width="620"}
+
   :::pdf-slides
   ---
   src: https://r2.eita.ptmi.jp/content/lt-2025-6.pdf
