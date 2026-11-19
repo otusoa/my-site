@@ -3,6 +3,9 @@
   "extends": [
     "github>unipro-tech/renovate-config//default"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchManagers": [
